@@ -1,4 +1,4 @@
-package com.quyetnv.magic_password.magic_password
+package com.quyetnv.magic_password
 
 import io.flutter.embedding.android.FlutterActivity
 

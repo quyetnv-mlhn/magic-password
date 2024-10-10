@@ -20,11 +20,11 @@ Before you begin, ensure you have met the following requirements:
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/password-manager-flutter.git
+   git clone https://github.com/quyetnv-mlhn/MagicPassword.git
    ```
 2. Navigate to the project directory:
    ```
-   cd password-manager-flutter
+   cd MagicPassword
    ```
 3. Get the dependencies:
    ```
@@ -78,6 +78,6 @@ Contributions to improve the Password Manager are welcome. Please follow these s
 Distributed under the MIT License. See `LICENSE` file for more information.
 
 ## Contact
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+[@quyetnv](https://www.linkedin.com/in/quyetnv/) - quyetnv.mlhn@gmail.com
 
-Project Link: [https://github.com/yourusername/password-manager-flutter](https://github.com/yourusername/password-manager-flutter)
+Project Link: [https://github.com/quyetnv-mlhn/MagicPassword](https://github.com/quyetnv-mlhn/MagicPassword)
