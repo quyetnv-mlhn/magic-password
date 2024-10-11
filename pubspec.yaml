@@ -33,6 +33,15 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
+  web:
+    generate: true
+    image_path: "assets/images/magic_password.png"
+  windows:
+    generate: true
+    image_path: "assets/images/magic_password.png"
+  macos:
+    generate: true
+    image_path: "assets/images/magic_password.png"
   image_path: "assets/images/magic_password.png"
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/images/magic_password.png"
@@ -40,12 +49,12 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#FFFFFF"
   image: "assets/images/magic_password.png"
-  background_image: "assets/images/magic_password.png"
-  background_image_dark: "assets/images/magic_password.png"
+#  background_image: "assets/images/magic_password.png"
+#  background_image_dark: "assets/images/magic_password.png"
   fullscreen: false
   android: true
   ios: true
-  web: false
+  web: true
   color_dark_android: "#FFFFFF"
   color_dark_ios: "#FFFFFF"
   ios_content_mode: scaleAspectFit
