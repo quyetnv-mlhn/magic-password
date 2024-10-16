@@ -46,6 +46,11 @@ Before running the app, ensure that splash screens and launcher icons are genera
    ```bash
    dart run flutter_launcher_icons:generate
    ```
+   
+## Deployment to Firebase Hosting
+   ```bash
+   firebase deploy --only hosting:magic-password-quyetnv
+   ```
 
 ## Build the App for Different Platforms
 
