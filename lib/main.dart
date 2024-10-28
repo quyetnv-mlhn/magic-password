@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_password/password_manager_screen.dart';
+import 'package:magic_password/widgets/password_manager_screen.dart';
 
 void main() {
   runApp(const MyApp());

@@ -5,15 +5,14 @@ import 'package:flutter/services.dart';
 import "package:crypto/crypto.dart" show Hmac, sha256;
 
 class PasswordManager {
-  static const int SALT_LENGTH = 16; // ignore: constant_identifier_names
-  static const int KEY_LENGTH = 32; // ignore: constant_identifier_names
-  static const int PBKDF2_ITERATIONS =
-      10000; // ignore: constant_identifier_names
+  static const int saltLength = 16;
+  static const int keyLength = 32;
+  static const int pbkdf2Iterations = 10000;
 
   // Function to generate a random salt
   String _generateSalt() {
     final random = Random.secure();
-    final salt = List<int>.generate(SALT_LENGTH, (i) => random.nextInt(256));
+    final salt = List<int>.generate(saltLength, (i) => random.nextInt(256));
     return base64Url.encode(salt);
   }
 
@@ -23,12 +22,12 @@ class PasswordManager {
     final saltBytes = base64Url.decode(salt); // Decode the salt
 
     var hmacSha256 = Hmac(sha256, key); // Create HMAC-SHA256 instance
-    var derivedKey = List<int>.filled(KEY_LENGTH, 0); // Initialize key list
+    var derivedKey = List<int>.filled(keyLength, 0); // Initialize key list
     var block = List<int>.filled(saltBytes.length + 4, 0); // Initialize block
     block.setRange(0, saltBytes.length, saltBytes); // Set salt in block
 
     // Loop to generate the key
-    for (var i = 0, j = 0; i < KEY_LENGTH; i++, j++) {
+    for (var i = 0, j = 0; i < keyLength; i++, j++) {
       if (j >= 32) {
         // Reset j after every 32 iterations
         j = 0;
@@ -42,7 +41,7 @@ class PasswordManager {
         var t = List<int>.from(u); // Initialize t with u
 
         // Perform PBKDF2 iterations
-        for (var k = 1; k < PBKDF2_ITERATIONS; k++) {
+        for (var k = 1; k < pbkdf2Iterations; k++) {
           u = hmacSha256.convert(u).bytes; // Repeated HMAC-SHA256
           for (var l = 0; l < t.length; l++) {
             t[l] ^= u[l]; // XOR to accumulate the derived key
@@ -50,7 +49,10 @@ class PasswordManager {
         }
 
         derivedKey.setRange(
-            i, min(i + 32, KEY_LENGTH), t); // Set the derived key
+          i,
+          min(i + 32, keyLength),
+          t,
+        ); // Set the derived key
         i += 31;
       }
     }
@@ -66,15 +68,18 @@ class PasswordManager {
         .fromSecureRandom(12); // Generate random IV (Initialization Vector)
 
     // Create AES encrypter using AES-GCM mode
-    final encrypter = encrypt.Encrypter(encrypt
-        .AES(encrypt.Key(Uint8List.fromList(key)), mode: encrypt.AESMode.gcm));
+    final encrypter = encrypt.Encrypter(
+      encrypt.AES(encrypt.Key(Uint8List.fromList(key)),
+          mode: encrypt.AESMode.gcm),
+    );
     final encrypted =
         encrypter.encrypt(password, iv: iv); // Encrypt the password
 
     // Combine salt, IV, and encrypted data
     final combined = '$salt|${base64Encode(iv.bytes + encrypted.bytes)}';
     return base64Encode(
-        utf8.encode(combined)); // Return encrypted result as base64
+      utf8.encode(combined),
+    ); // Return encrypted result as base64
   }
 
   // Function to decrypt a password using AES-GCM
@@ -95,14 +100,17 @@ class PasswordManager {
         encrypt.Encrypted(data.sublist(12)); // Extract encrypted part
 
     // Create AES encrypter for decryption
-    final encrypter = encrypt.Encrypter(encrypt
-        .AES(encrypt.Key(Uint8List.fromList(key)), mode: encrypt.AESMode.gcm));
+    final encrypter = encrypt.Encrypter(
+      encrypt.AES(encrypt.Key(Uint8List.fromList(key)),
+          mode: encrypt.AESMode.gcm),
+    );
 
     try {
       return encrypter.decrypt(encryptedData, iv: iv); // Attempt to decrypt
     } catch (e) {
       throw const FormatException(
-          'Decryption failed. Ensure the master password is correct.');
+        'Decryption failed. Ensure the master password is correct.',
+      );
     }
   }
 
@@ -128,7 +136,9 @@ class PasswordManager {
   String generateRandomKey() {
     final random = Random.secure();
     final values = List<int>.generate(
-        32, (i) => random.nextInt(256)); // Generate 32-byte key for AES-256
+      32,
+      (i) => random.nextInt(256),
+    ); // Generate 32-byte key for AES-256
     return base64UrlEncode(values); // Return the key as a base64-encoded string
   }
 }
