@@ -7,17 +7,23 @@ class EncryptPasswordSection extends StatelessWidget {
   final VoidCallback onEncryptPassword;
   final String encryptedPassword;
   final TextEditingController keyController;
+  final TextEditingController nameController;
   final TextEditingController passwordController;
   final ValueChanged<String> onKeyChanged;
   final ValueChanged<String> onPasswordChanged;
+  final ValueChanged<String> onSavePassword;
+  final ValueChanged<String> onNameChanged;
 
   const EncryptPasswordSection({
     required this.onEncryptPassword,
     required this.encryptedPassword,
+    required this.nameController,
     required this.keyController,
     required this.passwordController,
     required this.onKeyChanged,
     required this.onPasswordChanged,
+    required this.onSavePassword,
+    required this.onNameChanged,
     super.key,
   });
 
@@ -31,6 +37,12 @@ class EncryptPasswordSection extends StatelessWidget {
           controller: keyController,
           labelText: 'Enter Key',
           onChanged: onKeyChanged,
+        ),
+        const SizedBox(height: 8),
+        MultilineTextField(
+          controller: nameController,
+          labelText: 'Enter Name (required if saving)',
+          onChanged: onNameChanged,
         ),
         const SizedBox(height: 8),
         MultilineTextField(
@@ -48,11 +60,35 @@ class EncryptPasswordSection extends StatelessWidget {
             backgroundColor: Colors.orange,
           ),
         ),
-        if (encryptedPassword.isNotEmpty)
+        if (encryptedPassword.isNotEmpty) ...[
           CopyableText(
             label: 'Encrypted Password:',
             content: encryptedPassword,
           ),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.save),
+            label: const Text('Save Password'),
+            onPressed: () {
+              final name = nameController.text.trim();
+              final password = passwordController.text.trim();
+              if (name.isNotEmpty && password.isNotEmpty) {
+                onSavePassword(name);
+                nameController.clear();
+                passwordController.clear();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Name and Password are required'),
+                  ),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.blue,
+            ),
+          ),
+        ],
       ],
     );
   }

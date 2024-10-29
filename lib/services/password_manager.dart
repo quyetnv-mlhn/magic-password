@@ -69,8 +69,10 @@ class PasswordManager {
 
     // Create AES encrypter using AES-GCM mode
     final encrypter = encrypt.Encrypter(
-      encrypt.AES(encrypt.Key(Uint8List.fromList(key)),
-          mode: encrypt.AESMode.gcm),
+      encrypt.AES(
+        encrypt.Key(Uint8List.fromList(key)),
+        mode: encrypt.AESMode.gcm,
+      ),
     );
     final encrypted =
         encrypter.encrypt(password, iv: iv); // Encrypt the password
@@ -101,8 +103,10 @@ class PasswordManager {
 
     // Create AES encrypter for decryption
     final encrypter = encrypt.Encrypter(
-      encrypt.AES(encrypt.Key(Uint8List.fromList(key)),
-          mode: encrypt.AESMode.gcm),
+      encrypt.AES(
+        encrypt.Key(Uint8List.fromList(key)),
+        mode: encrypt.AESMode.gcm,
+      ),
     );
 
     try {

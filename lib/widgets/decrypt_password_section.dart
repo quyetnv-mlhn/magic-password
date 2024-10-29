@@ -9,6 +9,8 @@ class DecryptPasswordSection extends StatelessWidget {
   final TextEditingController decryptKeyController;
   final TextEditingController encryptedPasswordController;
   final ValueChanged<String> onDecryptKeyChanged;
+  final List<String> savedPasswordNames;
+  final ValueChanged<String?>? onSelectPasswordName;
 
   const DecryptPasswordSection({
     required this.onDecryptPassword,
@@ -16,6 +18,8 @@ class DecryptPasswordSection extends StatelessWidget {
     required this.decryptKeyController,
     required this.encryptedPasswordController,
     required this.onDecryptKeyChanged,
+    required this.savedPasswordNames,
+    required this.onSelectPasswordName,
     super.key,
   });
 
@@ -25,15 +29,30 @@ class DecryptPasswordSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionTile(title: '4. Decrypt Password'),
-        MultilineTextField(
-          controller: decryptKeyController,
-          labelText: 'Enter Decryption Key',
-          onChanged: onDecryptKeyChanged,
+        DropdownButtonFormField<String>(
+          decoration: const InputDecoration(
+            labelText: 'Select Saved Password',
+            border: OutlineInputBorder(),
+            alignLabelWithHint: true,
+          ),
+          items: savedPasswordNames.map((name) {
+            return DropdownMenuItem(
+              value: name,
+              child: Text(name),
+            );
+          }).toList(),
+          onChanged: onSelectPasswordName,
         ),
         const SizedBox(height: 8),
         MultilineTextField(
           controller: encryptedPasswordController,
           labelText: 'Enter Encrypted Password',
+        ),
+        const SizedBox(height: 8),
+        MultilineTextField(
+          controller: decryptKeyController,
+          labelText: 'Enter Decryption Key',
+          onChanged: onDecryptKeyChanged,
         ),
         const SizedBox(height: 8),
         ElevatedButton.icon(

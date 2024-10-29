@@ -16,6 +16,7 @@ dependencies:
   crypto: any
   flutter_native_splash: ^2.4.1
   flutter_launcher_icons: ^0.14.1
+  flutter_secure_storage: ^4.2.1
 
 dev_dependencies:
   flutter_test:
