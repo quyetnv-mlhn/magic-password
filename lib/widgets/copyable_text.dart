@@ -11,25 +11,45 @@ class CopyableText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Icon(Icons.vpn_key, 
+                        size: 16, 
+                        color: Colors.blue.shade700
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        label,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue.shade700,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 4),
-                  SelectableText(content),
+                  const SizedBox(height: 8),
+                  SelectableText(
+                    content,
+                    style: const TextStyle(fontSize: 15),
+                  ),
                 ],
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.copy, color: Colors.blue),
+              icon: const Icon(Icons.copy),
+              color: Colors.blue.shade700,
               onPressed: () => copyToClipboard(context, content),
             ),
           ],
