@@ -1,0 +1,32 @@
+{
+  "error": {
+    "decryptPasswordFailed": "Không thể giải mã mật khẩu",
+    "encryptPasswordFailed": "Mã hóa mật khẩu thất bại",
+    "failedGetSavedPassword": "Không thể lấy mật khẩu đã lưu",
+    "failedLoadEncryptedPassword": "Không tải được mật khẩu đã mã hóa",
+    "failedSavePassword": "Không lưu được mật khẩu",
+    "invalidInput": "Đầu vào không hợp lệ",
+    "invalidKey": "Khóa không hợp lệ",
+    "noInternet": "Không có kết nối internet",
+    "passwordNotFound": "Không tìm thấy mật khẩu",
+    "requiredField": "Trường này là bắt buộc",
+    "serverError": "Lỗi máy chủ",
+    "timeout": "Yêu cầu hết thời gian"
+  },
+  "password": "Mật khẩu",
+  "saved": "Đã lưu",
+  "someThingWentWrong": "Đã xảy ra lỗi",
+  "success": {
+    "passwordDeleted": "Đã xóa mật khẩu thành công",
+    "passwordSaved": "Mật khẩu đã được lưu thành công",
+    "passwordUpdated": "Đã cập nhật mật khẩu thành công"
+  },
+  "warning": {
+    "keyRequired": "Khóa là bắt buộc",
+    "nameRequired": "Tên là bắt buộc",
+    "passwordAndKeyRequired": "Yêu cầu mật khẩu và khóa",
+    "passwordAndNameRequired": "Yêu cầu mật khẩu và tên",
+    "passwordNameRequired": "Tên của mật khẩu là bắt buộc",
+    "passwordRequired": "Yêu cầu mật khẩu"
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_password/domain/entities/password.dart';
 import 'package:magic_password/widgets/copyable_text.dart';
 import 'package:magic_password/widgets/multiline_text_field.dart';
 import 'package:magic_password/widgets/section_tile.dart';
@@ -9,8 +10,8 @@ class DecryptPasswordSection extends StatelessWidget {
   final TextEditingController decryptKeyController;
   final TextEditingController encryptedPasswordController;
   final ValueChanged<String> onDecryptKeyChanged;
-  final List<String> savedPasswordNames;
-  final ValueChanged<String?>? onSelectPasswordName;
+  final List<PasswordEntity> savedPasswords;
+  final ValueChanged<PasswordEntity?>? onSelectPasswordName;
 
   const DecryptPasswordSection({
     required this.onDecryptPassword,
@@ -18,7 +19,7 @@ class DecryptPasswordSection extends StatelessWidget {
     required this.decryptKeyController,
     required this.encryptedPasswordController,
     required this.onDecryptKeyChanged,
-    required this.savedPasswordNames,
+    required this.savedPasswords,
     required this.onSelectPasswordName,
     super.key,
   });
@@ -29,16 +30,16 @@ class DecryptPasswordSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionTile(title: '4. Decrypt Password'),
-        DropdownButtonFormField<String>(
+        DropdownButtonFormField<PasswordEntity>(
           decoration: const InputDecoration(
             labelText: 'Select Saved Password',
             border: OutlineInputBorder(),
             alignLabelWithHint: true,
           ),
-          items: savedPasswordNames.map((name) {
+          items: savedPasswords.map((password) {
             return DropdownMenuItem(
-              value: name,
-              child: Text(name),
+              value: password,
+              child: Text(password.name),
             );
           }).toList(),
           onChanged: onSelectPasswordName,

@@ -25,9 +25,10 @@ class CopyableText extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.vpn_key, 
-                        size: 16, 
-                        color: Colors.blue.shade700
+                      Icon(
+                        Icons.vpn_key,
+                        size: 16,
+                        color: Colors.blue.shade700,
                       ),
                       const SizedBox(width: 8),
                       Text(

@@ -1,0 +1,32 @@
+{
+  "error": {
+    "decryptPasswordFailed": "Failed to decrypt password",
+    "encryptPasswordFailed": "Failed to encrypt password",
+    "failedGetSavedPassword": "Failed to get saved password",
+    "failedLoadEncryptedPassword": "Failed to load encrypted password",
+    "failedSavePassword": "Failed to save password",
+    "invalidInput": "Invalid input",
+    "invalidKey": "Invalid key",
+    "noInternet": "No internet connection",
+    "passwordNotFound": "Password not found",
+    "requiredField": "This field is required",
+    "serverError": "Server error",
+    "timeout": "Request timeout"
+  },
+  "password": "Password",
+  "saved": "Saved",
+  "someThingWentWrong": "Something went wrong",
+  "success": {
+    "passwordDeleted": "Password deleted successfully",
+    "passwordSaved": "Password saved successfully",
+    "passwordUpdated": "Password updated successfully"
+  },
+  "warning": {
+    "keyRequired": "Key is required",
+    "nameRequired": "Name is required",
+    "passwordAndKeyRequired": "Password and key are required",
+    "passwordAndNameRequired": "Password and name are required",
+    "passwordNameRequired": "Name of password are required",
+    "passwordRequired": "Password is required"
+  }
+}
