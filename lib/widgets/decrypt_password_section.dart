@@ -39,7 +39,7 @@ class DecryptPasswordSection extends StatelessWidget {
           items: savedPasswords.map((password) {
             return DropdownMenuItem(
               value: password,
-              child: Text(password.name),
+              child: Text(password.keyName),
             );
           }).toList(),
           onChanged: onSelectPasswordName,

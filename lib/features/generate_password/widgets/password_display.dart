@@ -25,13 +25,13 @@ class PasswordDisplay extends StatelessWidget {
           width: double.infinity,
           padding: paddingAllM,
           decoration: BoxDecoration(
-            color: colors.secondaryContainer,
+            color: colors.primaryContainer,
             borderRadius: BorderRadius.circular(radiusM),
           ),
           child: Text(
             password,
             style: textTheme.titleLarge?.copyWith(
-              color: colors.onSecondaryContainer,
+              color: colors.onPrimaryContainer,
               fontFamily: 'monospace',
             ),
             textAlign: TextAlign.center,

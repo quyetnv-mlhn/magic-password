@@ -89,8 +89,8 @@ class PasswordNotifier extends _$PasswordNotifier {
     }
   }
 
-  Future<void> savePassword(String name, String encryptedPassword) async {
-    if (name.isEmpty || encryptedPassword.isEmpty) {
+  Future<void> savePassword(PasswordEntity password) async {
+    if (password.accountCredential.isEmpty || password.encryptedValue.isEmpty) {
       SnackBarHandler.showWarning(
         LocaleKeys.warning_passwordAndNameRequired.tr(),
       );
@@ -98,10 +98,8 @@ class PasswordNotifier extends _$PasswordNotifier {
     }
 
     try {
-      await _repository.savePassword(
-        PasswordEntity(name: name, encryptedValue: encryptedPassword),
-      );
-      SnackBarHandler.showSuccess(LocaleKeys.saved.tr());
+      await _repository.savePassword(password);
+      SnackBarHandler.showSuccess(LocaleKeys.success_passwordSaved.tr());
     } catch (e, s) {
       handleError(e, s);
     }

@@ -59,7 +59,11 @@ class _PasswordGeneratorScreenState
               verticalSpaceL,
               const PasswordOptions(),
               verticalSpaceXL,
-              ActionButtons(password: state.generatedPassword),
+              ActionButtons(
+                password: state.generatedPassword,
+                canSave: state.userId.isNotEmpty &&
+                    state.generatedPassword.isNotEmpty,
+              ),
             ],
           ),
         ),
