@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:magic_password/domain/entities/social_media/account_type.dart';
 
 import '../../../core/configs/app_sizes.dart';
-import '../../../domain/entities/social_media/social_media.dart';
 import '../providers/password_generator_provider.dart';
 import '../providers/social_media_provider.dart';
 
@@ -22,13 +22,13 @@ class SocialMediaSelector extends ConsumerWidget {
       child: Container(
         padding: paddingAllM,
         decoration: BoxDecoration(
-          color: colors.secondaryContainer,
+          color: colors.primaryContainer,
           borderRadius: BorderRadius.circular(radiusM),
         ),
         child: Row(
           children: [
             SvgPicture.asset(
-              state.selectedSocialMedia.icon,
+              state.selectedAccountType.icon,
               width: iconXL,
               height: iconXL,
               placeholderBuilder: (context) => SizedBox.square(
@@ -41,7 +41,7 @@ class SocialMediaSelector extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  state.selectedSocialMedia.name,
+                  state.selectedAccountType.name,
                   style: textTheme.titleMedium,
                 ),
                 Text(
@@ -61,33 +61,33 @@ class SocialMediaSelector extends ConsumerWidget {
   void _showSocialMediaPicker(
     BuildContext context,
     WidgetRef ref,
-    List<SocialMediaEntity> socialMedias,
+    List<AccountTypeEntity> socialMedias,
   ) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => _SocialMediaList(socialMedias: socialMedias),
+      builder: (context) => _SocialMediaList(accountTypes: socialMedias),
     );
   }
 }
 
 class _SocialMediaList extends ConsumerWidget {
-  const _SocialMediaList({required this.socialMedias});
+  const _SocialMediaList({required this.accountTypes});
 
-  final List<SocialMediaEntity> socialMedias;
+  final List<AccountTypeEntity> accountTypes;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView.builder(
-      itemCount: socialMedias.length,
+      itemCount: accountTypes.length,
       itemBuilder: (context, index) {
-        final social = socialMedias[index];
+        final type = accountTypes[index];
         return ListTile(
-          leading: SvgPicture.asset(social.icon, width: iconM),
-          title: Text(social.name),
+          leading: SvgPicture.asset(type.icon, width: iconM),
+          title: Text(type.name),
           onTap: () {
             ref
                 .read(passwordGeneratorNotifierProvider.notifier)
-                .selectSocialMedia(social);
+                .selectAccountType(type);
             Navigator.pop(context);
           },
         );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/features/password/states/password_state.dart';
 import 'package:magic_password/widgets/decrypt_password_section.dart';
 import 'package:magic_password/widgets/encrypt_password_section.dart';
@@ -153,7 +154,12 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                         .updateInputPassword(value),
                     onSavePassword: (name) => ref
                         .read(passwordNotifierProvider.notifier)
-                        .savePassword(name, state.encryptedPassword),
+                        .savePassword(
+                          PasswordEntity(
+                            accountCredential: name,
+                            encryptedValue: state.encryptedPassword,
+                          ),
+                        ),
                     onNameChanged: (String value) {},
                   ),
                   const Divider(height: 32),

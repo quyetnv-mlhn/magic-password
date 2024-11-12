@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_password/domain/entities/social_media/social_media.dart';
+import 'package:magic_password/domain/entities/social_media/account_type.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../gen/assets.gen.dart';
@@ -7,24 +7,24 @@ import '../../../gen/assets.gen.dart';
 part 'social_media_provider.g.dart';
 
 @riverpod
-List<SocialMediaEntity> socialMediaList(Ref ref) {
+List<AccountTypeEntity> socialMediaList(Ref ref) {
   return [
-    SocialMediaEntity(
+    AccountTypeEntity(
       name: 'Facebook',
       url: 'https://www.facebook.com/',
       icon: Assets.icons.socialMedias.icons8Facebook500,
     ),
-    SocialMediaEntity(
+    AccountTypeEntity(
       name: 'Instagram',
       url: 'https://www.instagram.com/',
       icon: Assets.icons.socialMedias.icons8Instagram500,
     ),
-    SocialMediaEntity(
+    AccountTypeEntity(
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/',
       icon: Assets.icons.socialMedias.icons8Linkedin500,
     ),
-    SocialMediaEntity(
+    AccountTypeEntity(
       name: 'TikTok',
       url: 'https://www.tiktok.com/',
       icon: Assets.icons.socialMedias.icons8Tiktok500,

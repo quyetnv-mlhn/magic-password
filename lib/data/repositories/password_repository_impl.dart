@@ -79,7 +79,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       return allPasswords.entries
           .map(
             (e) => PasswordEntity(
-              name: e.key,
+              accountCredential: e.key,
               encryptedValue: e.value,
               isSaved: true,
             ),
@@ -96,7 +96,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
   Future<void> savePassword(PasswordEntity password) async {
     try {
       await _localDataSource.savePassword(
-        password.name,
+        password.keyName,
         password.encryptedValue,
       );
     } catch (e) {
