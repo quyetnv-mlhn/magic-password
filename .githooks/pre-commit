@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Colors for output
+# shellcheck disable=SC2034
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_color() {
+    printf "${!1}%s${NC}\n" "$2"
+}
+
+# Function to run a command and check its result
+run_command() {
+    print_color "YELLOW" "Running $1"
+    result=$($2)
+    exit_code=$?
+
+    if [ $exit_code -ne 0 ]; then
+        echo -e "$result \n"
+        print_color "RED" "$3"
+        exit 1
+    fi
+
+    echo "$result"
+    print_color "GREEN" "Finished running $1 successfully"
+}
+
+# Run dart fix
+run_command "dart fix" "dart fix --apply" "Dart fix failed, please check the errors and recommit"
+
+# Run dart format
+run_command "dart format" "dart format --set-exit-if-changed ." "Dart format applied changes, please stage the changes and recommit"
+
+# Run flutter analyze
+run_command "flutter analyze" "flutter analyze" "Flutter analyze found issues, please fix them before committing"
+
+print_color "GREEN" "All checks passed. Proceeding with the commit."
+exit 0

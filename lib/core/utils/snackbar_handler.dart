@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magic_password/core/extensions/app_localization_ext.dart';
-import 'package:magic_password/core/extensions/conntext_ext.dart';
+import 'package:magic_password/core/extensions/theme_ext.dart';
+import 'package:magic_password/gen/locale_keys.g.dart';
 
 import '../configs/app_sizes.dart';
 
@@ -31,6 +31,8 @@ class SnackBarHandler {
       return;
     }
 
+    scaffoldMessengerKey?.currentState?.clearSnackBars();
+
     final snackBar = SnackBar(
       content: AnimatedSnackBarContent(
         message: message,
@@ -52,8 +54,7 @@ class SnackBarHandler {
   static void showError(String? message, {String? title}) {
     showSnackBar(
       title: title,
-      message: message ??
-          AppLocalizationsExtension.getStaticLocalization().someThingWentWrong,
+      message: message ?? LocaleKeys.someThingWentWrong,
       backgroundColor: Colors.red,
       icon: Icons.error_outline,
     );
@@ -62,8 +63,7 @@ class SnackBarHandler {
   static void showSuccess(String? message, {String? title}) {
     showSnackBar(
       title: title,
-      message: message ??
-          AppLocalizationsExtension.getStaticLocalization().someThingWentWrong,
+      message: message ?? LocaleKeys.someThingWentWrong,
       backgroundColor: Colors.green,
       icon: Icons.check_circle_outline,
     );

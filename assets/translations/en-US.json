@@ -11,7 +11,8 @@
     "passwordNotFound": "Password not found",
     "requiredField": "This field is required",
     "serverError": "Server error",
-    "timeout": "Request timeout"
+    "timeout": "Request timeout",
+    "failedGeneratePassword": "Failed to generate password"
   },
   "password": "Password",
   "saved": "Saved",
@@ -27,6 +28,7 @@
     "passwordAndKeyRequired": "Password and key are required",
     "passwordAndNameRequired": "Password and name are required",
     "passwordNameRequired": "Name of password are required",
-    "passwordRequired": "Password is required"
+    "passwordRequired": "Password is required",
+    "selectAtLeastOne": "Select at least one option"
   }
 }

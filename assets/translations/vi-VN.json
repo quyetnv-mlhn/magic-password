@@ -27,6 +27,7 @@
     "passwordAndKeyRequired": "Yêu cầu mật khẩu và khóa",
     "passwordAndNameRequired": "Yêu cầu mật khẩu và tên",
     "passwordNameRequired": "Tên của mật khẩu là bắt buộc",
-    "passwordRequired": "Yêu cầu mật khẩu"
+    "passwordRequired": "Yêu cầu mật khẩu",
+    "selectAtLeastOne": "Chọn ít nhất một tùy chọn"
   }
 }

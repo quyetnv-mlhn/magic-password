@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_password/domain/entities/password.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/widgets/copyable_text.dart';
 import 'package:magic_password/widgets/multiline_text_field.dart';
 import 'package:magic_password/widgets/section_tile.dart';

@@ -9,21 +9,82 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+# Custom lint rules for Flutter projects
+# Include this file in your analysis_options.yaml
+
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # Code style
+    - always_declare_return_types
+    - always_put_required_named_parameters_first
+    - avoid_bool_literals_in_conditional_expressions
+    - avoid_redundant_argument_values
+    - avoid_setters_without_getters
+    - avoid_single_cascade_in_expression_statements
+    - cascade_invocations
+    - join_return_with_assignment
+    #    - missing_whitespace_between_adjacent_strings
+    # - prefer_expression_function_bodies
+    #    - prefer_final_in_for_each
+    - prefer_foreach
+    - prefer_if_elements_to_conditional_expressions
+    - unnecessary_lambdas
+    - unnecessary_parenthesis
+    - unnecessary_raw_strings
+    # - use_if_null_to_convert_nulls_to_bools
+    - use_string_buffers
     - require_trailing_commas
 
+    # Performance
+    - avoid_unnecessary_containers
+    - unnecessary_statements
+
+    # Error handling
+    - always_put_control_body_on_new_line
+    #    - avoid_catching_errors
+    - prefer_asserts_with_message
+    - throw_in_finally
+
+    # Flutter specific
+    - sized_box_for_whitespace
+    - use_decorated_box
+
+    # Pub specific
+    - sort_pub_dependencies
+
+    # Formatting (consider using dart format as well)
+    - lines_longer_than_80_chars
+    - curly_braces_in_flow_control_structures
+
+    # Documentation
+    #    - package_api_docs
+    #    - public_member_api_docs
+
+    # Design
+    #    - avoid_positional_boolean_parameters
+    #    - avoid_returning_null
+    #    - avoid_returning_this
+    #    - one_member_abstracts
+    #    - prefer_mixin
+    #    - use_setters_to_change_properties
+    - avoid_print
+
+    # Usage
+    - avoid_equals_and_hash_code_on_mutable_classes
+    - avoid_returning_null_for_future
+    - avoid_returning_null_for_void
+    - avoid_slow_async_io
+    - invariant_booleans
+    - literal_only_boolean_expressions
+    - no_adjacent_strings_in_list
+    - test_types_in_equals
+    - unnecessary_await_in_return
+    - use_to_and_as_if_applicable
+
+analyzer:
+  exclude:
+    - lib/gen/**  # Adjust this path to match your generated files
+    - lib/**.g.dart      # Ignore all .g.dart files
+    - lib/**.freezed.dart # Ignore freezed generated files, adjust as needed
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

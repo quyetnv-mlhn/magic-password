@@ -21,7 +21,7 @@ class PasswordLocalDataSourceImpl implements PasswordLocalDataSource {
 
   @override
   Future<Map<String, String>> getAllPasswords() async {
-    return await _storage.readAll();
+    return _storage.readAll();
   }
 
   @override

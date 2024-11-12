@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CopyableText extends StatelessWidget {
-  const CopyableText({super.key, required this.label, required this.content});
+  const CopyableText({required this.label, required this.content, super.key});
 
   final String label;
   final String content;

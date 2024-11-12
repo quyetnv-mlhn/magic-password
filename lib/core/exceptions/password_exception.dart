@@ -33,3 +33,10 @@ class PasswordNotFoundException extends PasswordException {
   const PasswordNotFoundException({String? messageKey})
       : super(messageKey: messageKey ?? LocaleKeys.error_passwordNotFound);
 }
+
+class FailedGeneratePasswordException extends PasswordException {
+  const FailedGeneratePasswordException({String? messageKey})
+      : super(
+          messageKey: messageKey ?? LocaleKeys.error_failedGeneratePassword,
+        );
+}
