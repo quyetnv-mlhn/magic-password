@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class MultilineTextField extends StatelessWidget {
   const MultilineTextField({
-    super.key,
     required this.controller,
     required this.labelText,
+    super.key,
     this.onChanged,
   });
   final TextEditingController controller;

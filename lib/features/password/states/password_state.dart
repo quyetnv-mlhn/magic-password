@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_password/domain/entities/password.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
 
 part 'password_state.freezed.dart';
 

@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:magic_password/core/di/providers.dart';
 import 'package:magic_password/core/utils/error_handler.dart';
 import 'package:magic_password/core/utils/snackbar_handler.dart';
-import 'package:magic_password/domain/entities/password.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/gen/locale_keys.g.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/repositories/password_repository.dart';
-import 'password_state.dart';
+import '../states/password_state.dart';
 
 part 'password_provider.g.dart';
 

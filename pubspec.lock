@@ -198,14 +198,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  color:
-    dependency: transitive
-    description:
-      name: color
-      sha256: ddcdf1b3badd7008233f5acffaf20ca9f5dc2cd0172b75f68f24526a5f5725cb
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   convert:
     dependency: transitive
     description:
@@ -278,14 +270,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
-  dartx:
-    dependency: transitive
-    description:
-      name: dartx
-      sha256: "8b25435617027257d43e6508b5fe061012880ddfdaa75a71d607c3de2a13d244"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   easy_localization:
     dependency: "direct main"
     description:
@@ -347,22 +331,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_gen_core:
-    dependency: transitive
-    description:
-      name: flutter_gen_core
-      sha256: "46ecf0e317413dd065547887c43f93f55e9653e83eb98dc13dd07d40dd225325"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.8.0"
-  flutter_gen_runner:
-    dependency: "direct main"
-    description:
-      name: flutter_gen_runner
-      sha256: "77f0a02fc30d9fcf2549fe874eb3fde091435724904bcbb1af60aa40cbfab1f4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.8.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -416,6 +384,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.1"
+  flutter_svg:
+    dependency: "direct main"
+    description:
+      name: flutter_svg
+      sha256: "578bd8c508144fdaffd4f77b8ef2d8c523602275cd697cc3db284dbd762ef4ce"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.14"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -458,14 +434,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-  go_router:
-    dependency: "direct main"
-    description:
-      name: go_router
-      sha256: ce89c5a993ca5eea74535f798478502c30a625ecb10a1de4d7fef5cd1bcac2a4
-      url: "https://pub.dev"
-    source: hosted
-    version: "14.4.1"
   graphs:
     dependency: transitive
     description:
@@ -474,14 +442,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
-  hashcodes:
-    dependency: transitive
-    description:
-      name: hashcodes
-      sha256: "80f9410a5b3c8e110c4b7604546034749259f5d6dcca63e0d3c17c9258f1a651"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   hotreloader:
     dependency: transitive
     description:
@@ -530,14 +490,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.0"
-  image_size_getter:
-    dependency: transitive
-    description:
-      name: image_size_getter
-      sha256: "0511799498340b70993d2dfb34b55a2247b5b801d75a6cdd4543acfcafdb12b0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   intl:
     dependency: "direct main"
     description:
@@ -570,6 +522,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
+  json_class:
+    dependency: transitive
+    description:
+      name: json_class
+      sha256: "668be1a27c493dd8822fe8c3ce3563ccd788e2b214d77a0b8b3bfad50272e7f9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0+16"
+  json_schema:
+    dependency: transitive
+    description:
+      name: json_schema
+      sha256: b183ba828374365a89b81246c06a9a636935897d509cd846998bbc0d9bd0a2cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.0"
   json_serializable:
     dependency: "direct dev"
     description:
@@ -578,6 +546,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.8.0"
+  json_theme_annotation:
+    dependency: transitive
+    description:
+      name: json_theme_annotation
+      sha256: a38c05487d4ca11dbaeb9b202f5b4e6c51c03b681d5181da1e38bb89c9a83121
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3+11"
+  json_theme_plus:
+    dependency: "direct main"
+    description:
+      name: json_theme_plus
+      sha256: "34824b7d9aa1b30a50be06a3355ff5abf87c29d7e97b872199586e61185d692a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.6.4"
   leak_tracker:
     dependency: transitive
     description:
@@ -778,6 +762,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: ea0b925899e64ecdfbf9c7becb60d5b50e706ade44a85b2363be2a22d88117d2
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.2"
+  rfc_6901:
+    dependency: transitive
+    description:
+      name: rfc_6901
+      sha256: df1bbfa3d023009598f19636d6114c6ac1e0b7bb7bf6a260f0e6e6ce91416820
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   riverpod:
     dependency: transitive
     description:
@@ -991,14 +991,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.2"
-  time:
-    dependency: transitive
-    description:
-      name: time
-      sha256: ad8e018a6c9db36cb917a031853a1aae49467a93e0d464683e029537d848c221
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.4"
   timing:
     dependency: transitive
     description:
@@ -1023,6 +1015,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  uri:
+    dependency: transitive
+    description:
+      name: uri
+      sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   uuid:
     dependency: transitive
     description:
@@ -1031,6 +1031,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.1"
+  vector_graphics:
+    dependency: transitive
+    description:
+      name: vector_graphics
+      sha256: "773c9522d66d523e1c7b25dfb95cc91c26a1e17b107039cfe147285e92de7878"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.14"
   vector_graphics_codec:
     dependency: transitive
     description:
@@ -1120,5 +1128,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.5.1 <4.0.0"
-  flutter: ">=3.24.0"
+  dart: ">=3.5.4 <4.0.0"
+  flutter: ">=3.24.4"

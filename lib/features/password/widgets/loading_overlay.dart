@@ -23,13 +23,14 @@ class LoadingOverlay extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                kIsWeb
-                    ? const CircularProgressIndicator.adaptive()
-                    : Lottie.asset(
-                        'assets/jsons/loading_lotie.json',
-                        width: 100,
-                        height: 100,
-                      ),
+                if (kIsWeb)
+                  const CircularProgressIndicator.adaptive()
+                else
+                  Lottie.asset(
+                    'assets/jsons/loading_lotie.json',
+                    width: 100,
+                    height: 100,
+                  ),
                 const SizedBox(height: 16),
                 const Text('Processing...'),
               ],

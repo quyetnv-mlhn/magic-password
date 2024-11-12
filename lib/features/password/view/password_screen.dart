@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_password/features/password/providers/password_state.dart';
+import 'package:magic_password/features/password/states/password_state.dart';
 import 'package:magic_password/widgets/decrypt_password_section.dart';
 import 'package:magic_password/widgets/encrypt_password_section.dart';
 import 'package:magic_password/widgets/generate_key_section.dart';
@@ -93,7 +93,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   }
 
   Widget _buildBody(BuildContext context, PasswordState state) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -185,7 +185,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   }
 
   Widget _buildFeatureCard({required String title, required Widget child}) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),

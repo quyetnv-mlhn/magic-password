@@ -9,6 +9,14 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// Directory path: assets/icons/social_medias
+  $AssetsIconsSocialMediasGen get socialMedias =>
+      const $AssetsIconsSocialMediasGen();
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -25,6 +33,9 @@ class $AssetsJsonsGen {
 
   /// File path: assets/jsons/loading_lotie.json
   String get loadingLotie => 'assets/jsons/loading_lotie.json';
+
+  /// Directory path: assets/jsons/themes
+  $AssetsJsonsThemesGen get themes => const $AssetsJsonsThemesGen();
 
   /// List of all assets
   List<String> get values => [loadingLotie];
@@ -43,9 +54,61 @@ class $AssetsTranslationsGen {
   List<String> get values => [enUS, viVN];
 }
 
+class $AssetsIconsSocialMediasGen {
+  const $AssetsIconsSocialMediasGen();
+
+  /// File path: assets/icons/social_medias/icons8_facebook_500.svg
+  String get icons8Facebook500 =>
+      'assets/icons/social_medias/icons8_facebook_500.svg';
+
+  /// File path: assets/icons/social_medias/icons8_facebook_messenger_500.svg
+  String get icons8FacebookMessenger500 =>
+      'assets/icons/social_medias/icons8_facebook_messenger_500.svg';
+
+  /// File path: assets/icons/social_medias/icons8_instagram_500.svg
+  String get icons8Instagram500 =>
+      'assets/icons/social_medias/icons8_instagram_500.svg';
+
+  /// File path: assets/icons/social_medias/icons8_linkedin_500.svg
+  String get icons8Linkedin500 =>
+      'assets/icons/social_medias/icons8_linkedin_500.svg';
+
+  /// File path: assets/icons/social_medias/icons8_telegram_app_500.svg
+  String get icons8TelegramApp500 =>
+      'assets/icons/social_medias/icons8_telegram_app_500.svg';
+
+  /// File path: assets/icons/social_medias/icons8_tiktok_500.svg
+  String get icons8Tiktok500 =>
+      'assets/icons/social_medias/icons8_tiktok_500.svg';
+
+  /// List of all assets
+  List<String> get values => [
+        icons8Facebook500,
+        icons8FacebookMessenger500,
+        icons8Instagram500,
+        icons8Linkedin500,
+        icons8TelegramApp500,
+        icons8Tiktok500
+      ];
+}
+
+class $AssetsJsonsThemesGen {
+  const $AssetsJsonsThemesGen();
+
+  /// File path: assets/jsons/themes/app_theme_dark.json
+  String get appThemeDark => 'assets/jsons/themes/app_theme_dark.json';
+
+  /// File path: assets/jsons/themes/app_theme_light.json
+  String get appThemeLight => 'assets/jsons/themes/app_theme_light.json';
+
+  /// List of all assets
+  List<String> get values => [appThemeDark, appThemeLight];
+}
+
 class Assets {
   Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();

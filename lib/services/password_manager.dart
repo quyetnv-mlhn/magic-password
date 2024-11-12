@@ -23,8 +23,8 @@ class PasswordManager {
 
     var hmacSha256 = Hmac(sha256, key); // Create HMAC-SHA256 instance
     var derivedKey = List<int>.filled(keyLength, 0); // Initialize key list
-    var block = List<int>.filled(saltBytes.length + 4, 0); // Initialize block
-    block.setRange(0, saltBytes.length, saltBytes); // Set salt in block
+    var block = List<int>.filled(saltBytes.length + 4, 0)
+      ..setRange(0, saltBytes.length, saltBytes); // Set salt in block
 
     // Loop to generate the key
     for (var i = 0, j = 0; i < keyLength; i++, j++) {
@@ -119,21 +119,40 @@ class PasswordManager {
   }
 
   // Function to generate a random password
-  String generatePassword({int length = 16, bool useSpecialChars = true}) {
+  String generatePassword({
+    int length = 20,
+    bool useSpecialChars = true,
+    bool useNumbers = true,
+    bool useUppercase = true,
+    bool useLowercase = true,
+  }) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numbers = '0123456789';
     const specialChars = '@#%^&*()_+=';
 
-    String chars =
-        lowercaseChars + uppercaseChars + numbers; // Base character set
+    // Build the character set based on selected options
+    String chars = '';
+    if (useLowercase) {
+      chars += lowercaseChars;
+    }
+    if (useUppercase) {
+      chars += uppercaseChars;
+    }
+    if (useNumbers) {
+      chars += numbers;
+    }
     if (useSpecialChars) {
-      chars += specialChars; // Add special characters if needed
+      chars += specialChars;
+    }
+
+    if (chars.isEmpty) {
+      throw ArgumentError('At least one character type should be selected');
     }
 
     final random = Random.secure();
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
-        .join(''); // Generate random password
+    return List.generate(length, (_) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
   // Function to generate a random key
