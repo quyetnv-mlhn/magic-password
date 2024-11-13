@@ -85,7 +85,7 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
 
     if (encryptedValue != null) {
       final password = PasswordEntity(
-        accountCredential: state.selectedAccountType.name,
+        accountCredential: state.userId,
         encryptedValue: encryptedValue,
         accountType: state.selectedAccountType,
         createdAt: DateTime.now(),

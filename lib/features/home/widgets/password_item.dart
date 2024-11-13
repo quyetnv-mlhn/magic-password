@@ -6,6 +6,7 @@ import 'package:magic_password/app/providers/master_key_provider.dart';
 import 'package:magic_password/app/providers/password_handler_provider.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
+import 'package:magic_password/core/utils/color_utils.dart';
 
 class PasswordItem extends ConsumerWidget {
   final String icon;
@@ -114,12 +115,13 @@ class PasswordItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
     final textTheme = context.textTheme;
+    final backgroundColor = ColorUtils.getRandomPastelColor();
 
     return Container(
       padding: paddingAllS,
       margin: EdgeInsets.only(bottom: spaceS),
       decoration: BoxDecoration(
-        color: colors.secondaryContainer,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(radiusM),
       ),
       child: Row(
@@ -138,14 +140,14 @@ class PasswordItem extends ConsumerWidget {
                 Text(
                   title,
                   style: textTheme.titleMedium?.copyWith(
-                    color: colors.onSecondaryContainer,
+                    color: colors.onSurface,
                   ),
                 ),
                 verticalSpaceXS,
                 Text(
                   email,
                   style: textTheme.bodySmall?.copyWith(
-                    color: colors.onSecondaryContainer,
+                    color: colors.onSurface,
                   ),
                 ),
               ],

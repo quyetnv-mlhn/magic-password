@@ -11,38 +11,44 @@ part 'home_page_provider.g.dart';
 
 @riverpod
 class HomePageNotifier extends _$HomePageNotifier {
-  late final SavedPasswordNotifier _savedPasswordProvider;
-
   @override
   Future<HomePageState> build() async {
     state = const AsyncData(HomePageState());
 
     try {
-      _savedPasswordProvider = ref.read(savedPasswordNotifierProvider.notifier);
-
-      final futures = await Future.wait([
-        _savedPasswordProvider.separatePasswordsByAccountType(),
-        _savedPasswordProvider.getListPasswordsRecentUsed(),
-      ]);
-
-      return HomePageState(
-        isLoading: false,
-        passwordsBySection:
-            futures[0] as Map<SectionEnum, List<PasswordEntity>>,
-        recentPasswords: futures[1] as List<PasswordEntity>,
-      );
+      return _loadData();
     } catch (e, stackTrace) {
       handleError(e, stackTrace);
-
-      return HomePageState(
-        isLoading: false,
-        error: '${LocaleKeys.error} ${e.toString()}',
-      );
+      return _handleError(e);
     }
+  }
+
+  Future<HomePageState> _loadData() async {
+    final savedPasswordProvider =
+        ref.read(savedPasswordNotifierProvider.notifier);
+
+    final futures = await Future.wait([
+      savedPasswordProvider.separatePasswordsByAccountType(),
+      savedPasswordProvider.getListPasswordsRecentUsed(),
+      Future.delayed(const Duration(milliseconds: 700)),
+    ]);
+
+    return HomePageState(
+      isLoading: false,
+      passwordsBySection: futures[0] as Map<SectionEnum, List<PasswordEntity>>,
+      recentPasswords: futures[1] as List<PasswordEntity>,
+    );
+  }
+
+  HomePageState _handleError(Object error) {
+    return HomePageState(
+      isLoading: false,
+      error: '${LocaleKeys.error} $error',
+    );
   }
 
   Future<void> refreshData() async {
     state = AsyncData(state.value!.copyWith(isLoading: true));
-    state = await AsyncValue.guard(build);
+    state = await AsyncValue.guard(_loadData);
   }
 }
