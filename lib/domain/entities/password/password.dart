@@ -11,7 +11,9 @@ class PasswordEntity with _$PasswordEntity {
   const factory PasswordEntity({
     required String accountCredential,
     required String encryptedValue,
-    AccountTypeEntity? accountType,
+    required DateTime createdAt,
+    required DateTime lastUsedAt,
+    required AccountTypeEntity accountType,
     @Default(false) bool isSaved,
   }) = _PasswordEntity;
 
@@ -19,8 +21,8 @@ class PasswordEntity with _$PasswordEntity {
       _$PasswordEntityFromJson(json);
 
   String get keyName {
-    final prefix = (accountType != null && accountType!.name.isNotEmpty)
-        ? '${accountType!.name}-'
+    final prefix = (accountType.name.isNotEmpty)
+        ? '${accountType.name.trim().replaceAll(' ', '')}-'
         : '';
     return '$prefix$accountCredential';
   }

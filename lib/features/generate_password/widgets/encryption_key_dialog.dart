@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/password_generator_provider.dart';
+import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
 
 class EncryptionKeyDialog extends ConsumerStatefulWidget {
   const EncryptionKeyDialog({super.key});

@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:json_theme_plus/json_theme_plus.dart';
 import 'package:magic_password/core/utils/snackbar_handler.dart';
 
-import 'gen/assets.gen.dart';
-import 'gen/codegen_loader.g.dart';
+import 'package:magic_password/gen/assets.gen.dart';
+import 'package:magic_password/gen/codegen_loader.g.dart';
 
 Future<void> bootstrap(
   Widget Function({
@@ -81,7 +81,7 @@ class MyObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     debugPrint(
-      '$_logPrefix Provider Initialized\n├─ Provider: '
+      '$_logPrefix 🟢 Provider Initialized\n├─ Provider: '
       '${_providerName(provider)}\n└─ Value: $value',
     );
   }
@@ -92,7 +92,8 @@ class MyObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     debugPrint(
-      '$_logPrefix Provider Disposed\n└─ Provider: ${_providerName(provider)}',
+      '$_logPrefix 🔴 Provider Disposed\n'
+      '└─ Provider: ${_providerName(provider)}',
     );
   }
 
@@ -105,7 +106,8 @@ class MyObserver extends ProviderObserver {
   ) {
     if (previousValue != newValue) {
       debugPrint(
-        '$_logPrefix Provider Updated\n├─ Provider: ${_providerName(provider)}'
+        '$_logPrefix 🔄 Provider Updated\n'
+        '├─ Provider: ${_providerName(provider)}'
         '\n├─ Previous: $previousValue\n└─ Current: $newValue',
       );
     }
@@ -119,7 +121,8 @@ class MyObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     debugPrint(
-      '$_logPrefix ❌ Provider Error\n├─ Provider: ${_providerName(provider)}\n'
+      '$_logPrefix ❌ Provider Error\n'
+      '├─ Provider: ${_providerName(provider)}\n'
       '├─ Error: $error\n└─ Stack trace: \n$stackTrace',
     );
   }

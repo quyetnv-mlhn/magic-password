@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app/app.dart';
-import 'bootstrap.dart';
+import 'package:magic_password/app/app.dart';
+import 'package:magic_password/bootstrap.dart';
 
 void main() {
   bootstrap(

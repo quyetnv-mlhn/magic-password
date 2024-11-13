@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/configs/app_sizes.dart';
-import '../providers/password_generator_provider.dart';
-import 'encryption_key_dialog.dart';
+import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
+import 'package:magic_password/features/generate_password/widgets/encryption_key_dialog.dart';
 
 class ActionButtons extends ConsumerWidget {
   const ActionButtons({

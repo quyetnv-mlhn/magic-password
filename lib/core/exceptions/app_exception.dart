@@ -10,6 +10,12 @@ abstract class AppException implements Exception {
   });
 
   @override
-  String toString() =>
-      'AppException(messageKey: $messageKey, code: $code, data: $data)';
+  String toString() {
+    final fields = <String>[
+      messageKey,
+      if (code != null) 'code: $code',
+      if (data != null) 'data: $data',
+    ];
+    return '${fields.join(', ')})';
+  }
 }

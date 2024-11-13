@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/gen/locale_keys.g.dart';
 
-import '../configs/app_sizes.dart';
+import 'package:magic_password/core/configs/app_sizes.dart';
 
 class SnackBarHandler {
   static final SnackBarHandler _instance = SnackBarHandler._internal();

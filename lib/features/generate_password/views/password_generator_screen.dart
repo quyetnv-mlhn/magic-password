@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_password/features/generate_password/widgets/account_type_selector.dart';
 
-import '../../../core/configs/app_sizes.dart';
-import '../providers/password_generator_provider.dart';
-import '../widgets/action_buttons.dart';
-import '../widgets/length_slider.dart';
-import '../widgets/password_display.dart';
-import '../widgets/password_options.dart';
-import '../widgets/social_media_selector.dart';
-import '../widgets/user_id_field.dart';
+import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
+import 'package:magic_password/features/generate_password/widgets/action_buttons.dart';
+import 'package:magic_password/features/generate_password/widgets/length_slider.dart';
+import 'package:magic_password/features/generate_password/widgets/password_display.dart';
+import 'package:magic_password/features/generate_password/widgets/password_options.dart';
+import 'package:magic_password/features/generate_password/widgets/user_id_field.dart';
 
 class PasswordGeneratorScreen extends ConsumerStatefulWidget {
   const PasswordGeneratorScreen({super.key});
@@ -49,7 +49,7 @@ class _PasswordGeneratorScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SocialMediaSelector(),
+              const AccountTypeSelector(),
               verticalSpaceL,
               UserIdField(controller: _userIdController),
               verticalSpaceL,

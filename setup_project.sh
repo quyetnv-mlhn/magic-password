@@ -183,13 +183,15 @@ elif [[ "$choice" == "2" ]]; then
   mkdir -p "$feature_path/providers"
   mkdir -p "$feature_path/views"
   mkdir -p "$feature_path/widgets"
+  mkdir -p "$feature_path/states"
 
   # Confirm completion
   echo "Feature '$feature_name' has been created with the following structure:"
   echo "$feature_path/"
   echo "├── providers/"
   echo "├── views/"
-  echo "└── widgets/"
+  echo "├── widgets/"
+  echo "└── states/"
 
 else
   echo "Invalid choice. Please run the script again and choose either 1 or 2."

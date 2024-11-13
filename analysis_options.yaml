@@ -1,17 +1,9 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
+# Configures the Dart analyzer for static code analysis, checking errors,
+# warnings, and enforcing lints in Flutter projects.
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
-# Custom lint rules for Flutter projects
-# Include this file in your analysis_options.yaml
-
+# Custom lint rules
 linter:
   rules:
     # Code style
@@ -23,15 +15,11 @@ linter:
     - avoid_single_cascade_in_expression_statements
     - cascade_invocations
     - join_return_with_assignment
-    #    - missing_whitespace_between_adjacent_strings
-    # - prefer_expression_function_bodies
-    #    - prefer_final_in_for_each
     - prefer_foreach
     - prefer_if_elements_to_conditional_expressions
     - unnecessary_lambdas
     - unnecessary_parenthesis
     - unnecessary_raw_strings
-    # - use_if_null_to_convert_nulls_to_bools
     - use_string_buffers
     - require_trailing_commas
 
@@ -41,7 +29,6 @@ linter:
 
     # Error handling
     - always_put_control_body_on_new_line
-    #    - avoid_catching_errors
     - prefer_asserts_with_message
     - throw_in_finally
 
@@ -52,21 +39,11 @@ linter:
     # Pub specific
     - sort_pub_dependencies
 
-    # Formatting (consider using dart format as well)
+    # Formatting
     - lines_longer_than_80_chars
     - curly_braces_in_flow_control_structures
 
-    # Documentation
-    #    - package_api_docs
-    #    - public_member_api_docs
-
     # Design
-    #    - avoid_positional_boolean_parameters
-    #    - avoid_returning_null
-    #    - avoid_returning_this
-    #    - one_member_abstracts
-    #    - prefer_mixin
-    #    - use_setters_to_change_properties
     - avoid_print
 
     # Usage
@@ -80,11 +57,13 @@ linter:
     - test_types_in_equals
     - unnecessary_await_in_return
     - use_to_and_as_if_applicable
+    - always_use_package_imports
 
 analyzer:
   exclude:
-    - lib/gen/**  # Adjust this path to match your generated files
-    - lib/**.g.dart      # Ignore all .g.dart files
-    - lib/**.freezed.dart # Ignore freezed generated files, adjust as needed
-# Additional information about this file can be found at
+    - lib/gen/**                # Generated files
+    - lib/**.g.dart             # All .g.dart files
+    - lib/**.freezed.dart       # Freezed generated files
+
+# For more information on configuring the analyzer:
 # https://dart.dev/guides/language/analysis-options

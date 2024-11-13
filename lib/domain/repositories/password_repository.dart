@@ -1,4 +1,4 @@
-import '../entities/password/password.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
 
 abstract class PasswordRepository {
   Future<List<PasswordEntity>> getSavedPasswords();

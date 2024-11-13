@@ -1,23 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:magic_password/core/di/providers.dart';
-import 'package:magic_password/core/utils/error_handler.dart';
 import 'package:magic_password/core/utils/snackbar_handler.dart';
 import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/gen/locale_keys.g.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/repositories/password_repository.dart';
-import '../states/password_state.dart';
+import 'package:magic_password/app/providers/password_handler_provider.dart';
+import 'package:magic_password/features/password/states/password_state.dart';
 
 part 'password_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class PasswordNotifier extends _$PasswordNotifier {
-  late final PasswordRepository _repository;
+  late final PasswordHandler _passwordHandler;
 
   @override
   PasswordState build() {
-    _repository = ref.read(passwordRepositoryProvider);
-    _loadSavedPasswordNames();
+    _passwordHandler = ref.read(passwordHandlerProvider.notifier);
     return const PasswordState();
   }
 
@@ -42,51 +39,48 @@ class PasswordNotifier extends _$PasswordNotifier {
   }
 
   Future<void> generateKey() async {
-    final newKey = _repository.generateKey();
+    final newKey = _passwordHandler.generateKey();
     state = state.copyWith(generatedKey: newKey);
   }
 
   Future<void> generatePassword() async {
-    final newPassword = _repository.generatePassword(
+    final newPassword = _passwordHandler.generatePassword(
       length: state.passwordLength,
     );
-    state = state.copyWith(generatedPassword: newPassword);
+    if (newPassword != null) {
+      state = state.copyWith(generatedPassword: newPassword);
+    }
   }
 
   Future<void> encryptPassword() async {
     setLoading(true);
-    try {
-      if (state.inputPassword.isEmpty || state.inputKey.isEmpty) {
-        SnackBarHandler.showWarning(
-          LocaleKeys.warning_passwordAndKeyRequired.tr(),
-        );
-        return;
-      }
-      final encrypted = await _repository.encryptPassword(
-        state.inputPassword,
-        state.inputKey,
+    if (state.inputPassword.isEmpty || state.inputKey.isEmpty) {
+      SnackBarHandler.showWarning(
+        LocaleKeys.warning_passwordAndKeyRequired.tr(),
       );
-      state = state.copyWith(encryptedPassword: encrypted);
-    } catch (e, s) {
-      handleError(e, s);
-    } finally {
-      setLoading(false);
+      return;
     }
+    final encrypted = await _passwordHandler.encryptPassword(
+      password: state.inputPassword,
+      masterKey: state.inputKey,
+    );
+    if (encrypted != null) {
+      state = state.copyWith(encryptedPassword: encrypted);
+    }
+
+    setLoading(false);
   }
 
   Future<void> decryptPassword(String encryptedText, String key) async {
     setLoading(true);
-    try {
-      final decrypted = await _repository.decryptPassword(
-        encryptedText,
-        key,
-      );
+    final decrypted = await _passwordHandler.decryptPassword(
+      encryptedPassword: encryptedText,
+      masterKey: key,
+    );
+    if (decrypted != null) {
       state = state.copyWith(decryptedPassword: decrypted);
-    } catch (e, s) {
-      handleError(e, s);
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   }
 
   Future<void> savePassword(PasswordEntity password) async {
@@ -97,21 +91,7 @@ class PasswordNotifier extends _$PasswordNotifier {
       return;
     }
 
-    try {
-      await _repository.savePassword(password);
-      SnackBarHandler.showSuccess(LocaleKeys.success_passwordSaved.tr());
-    } catch (e, s) {
-      handleError(e, s);
-    }
-  }
-
-  Future<void> _loadSavedPasswordNames() async {
-    try {
-      final savedPasswords = await _repository.getSavedPasswords();
-      state = state.copyWith(savedPasswords: savedPasswords);
-    } catch (e, s) {
-      handleError(e, s);
-    }
+    await _passwordHandler.savePassword(password);
   }
 
   Future<void> loadEncryptedPassword(PasswordEntity? password) async {

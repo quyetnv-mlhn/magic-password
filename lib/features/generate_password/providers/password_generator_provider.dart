@@ -1,21 +1,28 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:magic_password/core/di/providers.dart';
+import 'package:magic_password/app/providers/password_handler_provider.dart';
 import 'package:magic_password/core/utils/snackbar_handler.dart';
 import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/domain/entities/social_media/account_type.dart';
-import 'package:magic_password/features/generate_password/providers/social_media_provider.dart';
+import 'package:magic_password/app/providers/account_type_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/utils/error_handler.dart';
-import '../../../domain/repositories/password_repository.dart';
-import '../../../gen/locale_keys.g.dart';
-import '../states/password_generator_state.dart';
+import 'package:magic_password/gen/locale_keys.g.dart';
+import 'package:magic_password/features/generate_password/states/password_generator_state.dart';
 
 part 'password_generator_provider.g.dart';
 
 @riverpod
 class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
-  late final PasswordRepository _repository;
+  late final PasswordHandler _passwordHandler;
+
+  @override
+  PasswordGeneratorState build() {
+    final socialMedias = ref.read(accountTypeListProvider);
+    _passwordHandler = ref.read(passwordHandlerProvider.notifier);
+    state = PasswordGeneratorState(selectedAccountType: socialMedias.first);
+    _generatePassword();
+    return state;
+  }
 
   void updateUserId(String userId) {
     state = state.copyWith(userId: userId);
@@ -71,16 +78,18 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
   }
 
   Future<void> savePassword() async {
-    try {
-      final encryptedValue = await _repository.encryptPassword(
-        state.generatedPassword,
-        state.encryptionKey,
-      );
+    final encryptedValue = await _passwordHandler.encryptPassword(
+      password: state.generatedPassword,
+      masterKey: state.encryptionKey,
+    );
 
+    if (encryptedValue != null) {
       final password = PasswordEntity(
         accountCredential: state.selectedAccountType.name,
         encryptedValue: encryptedValue,
         accountType: state.selectedAccountType,
+        createdAt: DateTime.now(),
+        lastUsedAt: DateTime.now(),
       );
 
       if (password.accountCredential.isEmpty ||
@@ -90,10 +99,7 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
         );
         return;
       }
-      await _repository.savePassword(password);
-      SnackBarHandler.showSuccess(LocaleKeys.success_passwordSaved.tr());
-    } catch (e, s) {
-      handleError(e, s);
+      await _passwordHandler.savePassword(password);
     }
   }
 
@@ -112,26 +118,15 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
       SnackBarHandler.showWarning(LocaleKeys.warning_selectAtLeastOne.tr());
       return;
     }
-    try {
-      final password = _repository.generatePassword(
-        length: state.passwordLength,
-        useUppercase: state.useUppercase,
-        useLowercase: state.useLowercase,
-        useNumbers: state.useNumbers,
-        useSpecialChars: state.useSymbols,
-      );
+    final password = _passwordHandler.generatePassword(
+      length: state.passwordLength,
+      useUppercase: state.useUppercase,
+      useLowercase: state.useLowercase,
+      useNumbers: state.useNumbers,
+      useSpecialChars: state.useSymbols,
+    );
+    if (password != null) {
       state = state.copyWith(generatedPassword: password);
-    } catch (e, s) {
-      handleError(e, s);
     }
-  }
-
-  @override
-  PasswordGeneratorState build() {
-    final socialMedias = ref.read(socialMediaListProvider);
-    _repository = ref.read(passwordRepositoryProvider);
-    state = PasswordGeneratorState(selectedAccountType: socialMedias.first);
-    _generatePassword();
-    return state;
   }
 }

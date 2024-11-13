@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/configs/app_sizes.dart';
+import 'package:magic_password/core/configs/app_sizes.dart';
 
 class PasswordDisplay extends StatelessWidget {
   const PasswordDisplay({

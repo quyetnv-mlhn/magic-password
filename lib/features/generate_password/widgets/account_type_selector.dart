@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:magic_password/domain/entities/social_media/account_type.dart';
+import 'package:magic_password/app/providers/account_type_provider.dart';
 
-import '../../../core/configs/app_sizes.dart';
-import '../providers/password_generator_provider.dart';
-import '../providers/social_media_provider.dart';
+import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
 
-class SocialMediaSelector extends ConsumerWidget {
-  const SocialMediaSelector({super.key});
+class AccountTypeSelector extends ConsumerWidget {
+  const AccountTypeSelector({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(passwordGeneratorNotifierProvider);
-    final socialMedias = ref.watch(socialMediaListProvider);
+    final socialMedias = ref.watch(accountTypeListProvider);
     final colors = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -47,7 +47,7 @@ class SocialMediaSelector extends ConsumerWidget {
                 Text(
                   state.userId.isEmpty ? 'user.email@gmail.com' : state.userId,
                   style: textTheme.bodySmall?.copyWith(
-                    color: colors.onSecondaryContainer,
+                    color: colors.onPrimaryContainer,
                   ),
                 ),
               ],

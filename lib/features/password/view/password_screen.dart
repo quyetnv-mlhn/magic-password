@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magic_password/domain/entities/password/password.dart';
 import 'package:magic_password/features/password/states/password_state.dart';
 import 'package:magic_password/widgets/decrypt_password_section.dart';
 import 'package:magic_password/widgets/encrypt_password_section.dart';
 import 'package:magic_password/widgets/generate_key_section.dart';
 import 'package:magic_password/widgets/generate_password_section.dart';
-import '../providers/password_provider.dart';
-import '../widgets/loading_overlay.dart';
+import 'package:magic_password/features/password/providers/password_provider.dart';
+import 'package:magic_password/features/password/widgets/loading_overlay.dart';
 
 class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});
@@ -152,14 +151,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                     onPasswordChanged: (value) => ref
                         .read(passwordNotifierProvider.notifier)
                         .updateInputPassword(value),
-                    onSavePassword: (name) => ref
-                        .read(passwordNotifierProvider.notifier)
-                        .savePassword(
-                          PasswordEntity(
-                            accountCredential: name,
-                            encryptedValue: state.encryptedPassword,
-                          ),
-                        ),
+                    onSavePassword: (name) {},
                     onNameChanged: (String value) {},
                   ),
                   const Divider(height: 32),

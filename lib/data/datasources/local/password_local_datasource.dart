@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class PasswordLocalDataSource {
-  Future<void> savePassword(String name, String encryptedValue);
+  Future<void> savePassword(String name, String passwordEntity);
   Future<Map<String, String>> getAllPasswords();
 
   Future<String?> loadPassword(String name);
@@ -15,8 +15,8 @@ class PasswordLocalDataSourceImpl implements PasswordLocalDataSource {
   }) : _storage = storage;
 
   @override
-  Future<void> savePassword(String name, String encryptedValue) async {
-    await _storage.write(key: name, value: encryptedValue);
+  Future<void> savePassword(String name, String passwordEntity) async {
+    await _storage.write(key: name, value: passwordEntity);
   }
 
   @override
