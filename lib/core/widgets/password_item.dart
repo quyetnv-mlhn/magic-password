@@ -25,33 +25,41 @@ class PasswordItem extends ConsumerWidget {
   });
 
   Future<String?> _showMasterKeyDialog(BuildContext context) async {
-    final colors = context.colorScheme;
+    final textTheme = context.textTheme;
+    String? masterKey;
+
     return showDialog<String>(
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        String? masterKey;
         return AlertDialog(
-          title: const Text('Enter Master Key'),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            'Enter Master Key',
+            style: textTheme.titleLarge,
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Master Key',
                   hintText: 'Enter your master key',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(radiusS),
+                  ),
                 ),
                 onChanged: (value) => masterKey = value,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Text(
                 'Note: This key will only be used for the current session. '
                 'You can change or clear it in Settings.',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: colors.error,
-                ),
+                style: textTheme.bodySmall,
+                textAlign: TextAlign.justify,
               ),
             ],
           ),
@@ -60,7 +68,7 @@ class PasswordItem extends ConsumerWidget {
               onPressed: () => Navigator.pop(context),
               child: const Text('Cancel'),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () => Navigator.pop(context, masterKey),
               child: const Text('Confirm'),
             ),
@@ -115,7 +123,7 @@ class PasswordItem extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
     final textTheme = context.textTheme;
-    final backgroundColor = ColorUtils.getRandomPastelColor();
+    final backgroundColor = ColorUtils.getRandomPastelColor(context);
 
     return Container(
       padding: paddingAllS,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/features/password/states/password_state.dart';
 import 'package:magic_password/widgets/decrypt_password_section.dart';
 import 'package:magic_password/widgets/encrypt_password_section.dart';
@@ -55,7 +56,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
       child: Stack(
         children: [
           Scaffold(
-            appBar: _buildAppBar(),
+            appBar: _buildAppBar(context),
             body: _buildBody(context, state),
           ),
           if (state.isLoading) const LoadingOverlay(),
@@ -64,15 +65,11 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      title: const Text(
+      title: Text(
         'Password Manager',
-        style: TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 24,
-          letterSpacing: 0.5,
-        ),
+        style: context.textTheme.titleLarge,
       ),
       centerTitle: true,
       elevation: 0,
@@ -109,6 +106,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
         child: Column(
           children: [
             _buildFeatureCard(
+              context,
               title: "Security Center",
               child: Column(
                 children: [
@@ -134,6 +132,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
             ),
             const SizedBox(height: 20),
             _buildFeatureCard(
+              context,
               title: "Password Management",
               child: Column(
                 children: [
@@ -182,7 +181,11 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     );
   }
 
-  Widget _buildFeatureCard({required String title, required Widget child}) {
+  Widget _buildFeatureCard(
+    BuildContext context, {
+    required String title,
+    required Widget child,
+  }) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -217,11 +220,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 const SizedBox(width: 12),
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: context.textTheme.titleMedium,
                 ),
               ],
             ),

@@ -5,6 +5,7 @@ import 'package:magic_password/features/generate_password/views/password_generat
 import 'package:magic_password/features/home/views/home_screen.dart';
 import 'package:magic_password/features/main/providers/bottom_nav_provider.dart';
 import 'package:magic_password/features/main/widgets/custom_bottom_nav_bar.dart';
+import 'package:magic_password/features/search/views/search_screen.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -19,7 +20,12 @@ class MainScreen extends ConsumerWidget {
       const HomeScreen(),
       const Center(child: Text('History')),
       const PasswordGeneratorScreen(),
-      const Center(child: Text('Search')),
+      SearchScreen(
+        autoFocus: ref.watch(
+          bottomNavNotifierProvider
+              .select((value) => value.params['autoFocus'] ?? false),
+        ),
+      ),
       const Center(child: Text('Profile')),
     ];
 

@@ -1,12 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/core/widgets/custom_search_bar.dart';
 import 'package:magic_password/features/home/providers/home_page_provider.dart';
 import 'package:magic_password/features/home/states/home_page_state.dart';
 import 'package:magic_password/features/home/widgets/header_section.dart';
-import 'package:magic_password/features/home/widgets/search_bar_widget.dart';
+import 'package:magic_password/features/main/providers/bottom_nav_provider.dart';
 import 'package:magic_password/features/password/widgets/loading_overlay.dart';
 import 'package:magic_password/features/home/widgets/manage_password_section.dart';
 import 'package:magic_password/features/home/widgets/recently_used_section.dart';
@@ -40,23 +39,27 @@ class HomeScreenContent extends ConsumerWidget {
             onRefresh: () async {
               ref.invalidate(homePageNotifierProvider);
             },
-            child: CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.all(16),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate([
-                      const HeaderSection(),
-                      verticalSpaceL,
-                      const SearchBarWidget(),
-                      verticalSpaceL,
-                      const ManagePasswordSection(),
-                      verticalSpaceL,
-                      RecentlyUsedSection(
-                        passwords: state.recentPasswords,
-                      ),
-                    ]),
+            child: ListView(
+              padding: paddingAllM,
+              children: [
+                const HeaderSection(),
+                verticalSpaceL,
+                GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(bottomNavNotifierProvider.notifier)
+                        .goToSearchPage();
+                  },
+                  child: const SearchBarWidget(
+                    hintText: 'Search',
+                    enabled: false,
                   ),
+                ),
+                verticalSpaceL,
+                const ManagePasswordSection(),
+                verticalSpaceL,
+                RecentlyUsedSection(
+                  passwords: state.recentPasswords,
                 ),
               ],
             ),
@@ -66,43 +69,4 @@ class HomeScreenContent extends ConsumerWidget {
       ],
     );
   }
-}
-
-class CurvedTextPainter extends CustomPainter {
-  final String text;
-  final TextStyle textStyle;
-  final double radius;
-
-  CurvedTextPainter(this.text, this.textStyle, {this.radius = 100});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
-    final anglePerChar = 2 * pi / text.length;
-
-    for (int i = 0; i < text.length; i++) {
-      final character = text[i];
-      textPainter
-        ..text = TextSpan(text: character, style: textStyle)
-        ..layout();
-
-      final offsetAngle = -pi / 2 + anglePerChar * i;
-      final offset = Offset(
-        radius * cos(offsetAngle) - textPainter.width / 2,
-        radius * sin(offsetAngle) - textPainter.height / 2,
-      );
-
-      canvas
-        ..save()
-        ..translate(size.width / 2 + offset.dx, size.height / 2 + offset.dy)
-        ..rotate(offsetAngle + pi / 2);
-      textPainter.paint(canvas, Offset.zero);
-      canvas.restore();
-    }
-  }
-
-  @override
-  bool shouldRepaint(CurvedTextPainter oldDelegate) => oldDelegate.text != text;
 }

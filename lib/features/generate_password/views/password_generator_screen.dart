@@ -41,7 +41,6 @@ class _PasswordGeneratorScreenState
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          leading: const BackButton(),
           title: Text('Password Generator', style: textTheme.titleLarge),
         ),
         body: SingleChildScrollView(

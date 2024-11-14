@@ -8,7 +8,14 @@ class BottomNavNotifier extends _$BottomNavNotifier {
   @override
   BottomNavState build() => const BottomNavState();
 
-  void changeIndex(int index) {
-    state = state.copyWith(currentIndex: index);
+  void changeIndex(int index, {Map<String, dynamic>? params}) {
+    state = state.copyWith(
+      currentIndex: index,
+      params: params ?? {},
+    );
+  }
+
+  void goToSearchPage({bool autoFocus = true}) {
+    changeIndex(3, params: {'autoFocus': autoFocus});
   }
 }
