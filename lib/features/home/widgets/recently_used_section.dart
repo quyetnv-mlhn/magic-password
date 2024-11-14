@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/domain/entities/password/password.dart';
-import 'package:magic_password/features/home/widgets/password_item.dart';
+import 'package:magic_password/core/widgets/password_item.dart';
 
 class RecentlyUsedSection extends StatelessWidget {
   final List<PasswordEntity> passwords;

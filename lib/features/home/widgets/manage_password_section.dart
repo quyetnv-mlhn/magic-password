@@ -42,19 +42,19 @@ class ManagePasswordSection extends StatelessWidget {
             CategoryCard(
               icon: Icons.people,
               title: 'Social',
-              color: ColorUtils.getRandomCardColor(),
+              color: ColorUtils.getRandomCardColor(context),
               onTap: () {},
             ),
             CategoryCard(
               icon: Icons.apps,
               title: 'Apps',
-              color: ColorUtils.getRandomCardColor(),
+              color: ColorUtils.getRandomCardColor(context),
               onTap: () {},
             ),
             CategoryCard(
               icon: Icons.credit_card,
               title: 'Cards',
-              color: ColorUtils.getRandomCardColor(),
+              color: ColorUtils.getRandomCardColor(context),
               onTap: () {},
             ),
           ],
