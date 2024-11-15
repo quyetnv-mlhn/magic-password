@@ -54,7 +54,7 @@ class SnackBarHandler {
   static void showError(String? message, {String? title}) {
     showSnackBar(
       title: title,
-      message: message ?? LocaleKeys.someThingWentWrong,
+      message: message ?? LocaleKeys.messages_someThingWentWrong,
       backgroundColor: Colors.red,
       icon: Icons.error_outline,
     );
@@ -63,7 +63,7 @@ class SnackBarHandler {
   static void showSuccess(String? message, {String? title}) {
     showSnackBar(
       title: title,
-      message: message ?? LocaleKeys.someThingWentWrong,
+      message: message ?? LocaleKeys.messages_someThingWentWrong,
       backgroundColor: Colors.green,
       icon: Icons.check_circle_outline,
     );

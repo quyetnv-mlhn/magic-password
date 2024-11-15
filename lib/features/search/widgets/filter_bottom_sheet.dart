@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_password/app/providers/account_type_provider.dart';
@@ -6,6 +7,7 @@ import 'package:magic_password/core/enums/section_enum.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/domain/entities/social_media/account_type.dart';
 import 'package:magic_password/features/search/providers/search_provider.dart';
+import 'package:magic_password/gen/locale_keys.g.dart';
 
 class FilterBottomSheet extends ConsumerWidget {
   const FilterBottomSheet({super.key});
@@ -31,7 +33,7 @@ class FilterBottomSheet extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildFilterSection(
-                      title: 'Sections',
+                      title: LocaleKeys.search_filter_sections.tr(),
                       icon: Icons.folder_outlined,
                       child: _buildSectionFilters(
                         context,

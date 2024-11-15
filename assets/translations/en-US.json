@@ -1,33 +1,70 @@
 {
-  "error": {
+  "actions": {
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "close": "Close",
+    "confirm": "Confirm"
+  },
+  "encryption": {
+    "enterEncryptionKey": "Enter encryption key",
+    "enterMasterKey": "Enter master key",
+    "enterYourMasterKey": "Enter your master key",
+    "masterKey": "Master key",
+    "note": "This key will only be used for the current session. You can change or clear it in Settings"
+  },
+  "errors": {
     "decryptPasswordFailed": "Failed to decrypt password",
     "encryptPasswordFailed": "Failed to encrypt password",
+    "failedDeletePassword": "Failed to delete password",
+    "failedGeneratePassword": "Failed to generate password",
     "failedGetSavedPassword": "Failed to get saved password",
     "failedLoadEncryptedPassword": "Failed to load encrypted password",
     "failedSavePassword": "Failed to save password",
+    "failedUpdatePassword": "Failed to update password",
     "invalidInput": "Invalid input",
     "invalidKey": "Invalid key",
     "noInternet": "No internet connection",
     "passwordNotFound": "Password not found",
     "requiredField": "This field is required",
     "serverError": "Server error",
-    "timeout": "Request timeout",
-    "failedGeneratePassword": "Failed to generate password"
+    "timeout": "Request timeout"
   },
-  "password": "Password",
-  "saved": "Saved",
-  "someThingWentWrong": "Something went wrong",
+  "filter": {
+    "sections": {
+      "apps": "Apps",
+      "cards": "Cards",
+      "social": "Social"
+    }
+  },
+  "messages": {
+    "processing": "Processing...",
+    "saved": "Saved",
+    "someThingWentWrong": "Something went wrong"
+  },
+  "password": {
+    "label": "Password"
+  },
+  "search": {
+    "filter": {
+      "accountTypes": "Account types",
+      "sections": "Sections",
+      "title": "Filter"
+    },
+    "noResults": "No passwords found",
+    "title": "Search passwords..."
+  },
   "success": {
     "passwordDeleted": "Password deleted successfully",
     "passwordSaved": "Password saved successfully",
     "passwordUpdated": "Password updated successfully"
   },
-  "warning": {
+  "warnings": {
     "keyRequired": "Key is required",
     "nameRequired": "Name is required",
     "passwordAndKeyRequired": "Password and key are required",
     "passwordAndNameRequired": "Password and name are required",
-    "passwordNameRequired": "Name of password are required",
+    "passwordNameRequired": "Name of password is required",
     "passwordRequired": "Password is required",
     "selectAtLeastOne": "Select at least one option"
   }

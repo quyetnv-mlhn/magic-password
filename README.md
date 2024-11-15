@@ -33,6 +33,23 @@ Before you begin, ensure you have met the following requirements:
    flutter pub get
    ```
 
+## Additional Generation Commands
+
+These commands are optional and can be run when needed for specific features:
+
+### Watch for Code Changes
+
+```bash
+dart run build_runner watch
+```
+
+### Generate Localization Files
+
+```bash
+flutter pub run easy_localization:generate -S assets/translations -O lib/gen
+flutter pub run easy_localization:generate -S assets/translations -O lib/gen -o locale_keys.g.dart -f keys
+```
+
 ## Generating Splash Screen and Launcher Icons
 
 Before running the app, ensure that splash screens and launcher icons are generated:

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:magic_password/core/enums/section_enum.dart';
 
 import 'package:magic_password/features/generate_password/views/password_generator_screen.dart';
 import 'package:magic_password/features/home/views/home_screen.dart';
@@ -24,6 +25,14 @@ class MainScreen extends ConsumerWidget {
         autoFocus: ref.watch(
           bottomNavNotifierProvider
               .select((value) => value.params['autoFocus'] ?? false),
+        ),
+        initSection: ref.watch(
+          bottomNavNotifierProvider
+              .select((value) => value.params['initSection'] as SectionEnum?),
+        ),
+        showFilterSheet: ref.watch(
+          bottomNavNotifierProvider
+              .select((value) => value.params['showFilterSheet'] as bool?),
         ),
       ),
       const Center(child: Text('Profile')),

@@ -7,7 +7,7 @@ import 'package:magic_password/widgets/encrypt_password_section.dart';
 import 'package:magic_password/widgets/generate_key_section.dart';
 import 'package:magic_password/widgets/generate_password_section.dart';
 import 'package:magic_password/features/password/providers/password_provider.dart';
-import 'package:magic_password/features/password/widgets/loading_overlay.dart';
+import 'package:magic_password/core/widgets/loading_overlay.dart';
 
 class PasswordScreen extends ConsumerStatefulWidget {
   const PasswordScreen({super.key});

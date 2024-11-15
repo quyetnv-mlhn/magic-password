@@ -15,4 +15,8 @@ abstract class PasswordRepository {
   });
 
   Future<String> loadEncryptedPassword(String name);
+
+  Future<void> deletePassword(PasswordEntity password);
+
+  Future<void> updatePassword(PasswordEntity password);
 }

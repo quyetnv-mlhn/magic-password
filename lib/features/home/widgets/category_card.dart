@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/core/enums/section_enum.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 
 class CategoryCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final Color color;
+  final SectionEnum section;
   final VoidCallback? onTap;
 
   const CategoryCard({
     required this.icon,
     required this.title,
     required this.color,
+    required this.section,
     super.key,
     this.onTap,
   });

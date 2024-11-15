@@ -1,3 +1,4 @@
+import 'package:magic_password/app/providers/password_handler_provider.dart';
 import 'package:magic_password/app/providers/saved_password_provider.dart';
 import 'package:magic_password/core/enums/section_enum.dart';
 import 'package:magic_password/core/utils/error_handler.dart';
@@ -43,12 +44,18 @@ class HomePageNotifier extends _$HomePageNotifier {
   HomePageState _handleError(Object error) {
     return HomePageState(
       isLoading: false,
-      error: '${LocaleKeys.error} $error',
+      error: '${LocaleKeys.errors} $error',
     );
   }
 
   Future<void> refreshData() async {
     state = AsyncData(state.value!.copyWith(isLoading: true));
     state = await AsyncValue.guard(_loadData);
+  }
+
+  Future<void> deletePassword(PasswordEntity password) async {
+    final passwordHandler = ref.read(passwordHandlerProvider.notifier);
+    await passwordHandler.deletePassword(password);
+    await refreshData();
   }
 }
