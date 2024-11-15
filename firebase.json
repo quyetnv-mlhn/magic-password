@@ -1,17 +1,1 @@
-{
-  "hosting": {
-    "site": "magic-password-quyetnv",
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
+{"hosting":{"site":"magic-password-quyetnv","public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"magic-password-2a82c","appId":"1:1058226922760:android:bb2ffa9934e5c629e538bd","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"magic-password-2a82c","appId":"1:1058226922760:ios:f4fe2f9794075e02e538bd","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"magic-password-2a82c","appId":"1:1058226922760:ios:f4fe2f9794075e02e538bd","uploadDebugSymbols":true,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"magic-password-2a82c","configurations":{"android":"1:1058226922760:android:bb2ffa9934e5c629e538bd","ios":"1:1058226922760:ios:f4fe2f9794075e02e538bd","macos":"1:1058226922760:ios:f4fe2f9794075e02e538bd","web":"1:1058226922760:web:cc4a5c14e99e8955e538bd","windows":"1:1058226922760:web:3c15a8e1319d4107e538bd"}}}}}}

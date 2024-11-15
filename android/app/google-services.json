@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058226922760",
+    "project_id": "magic-password-2a82c",
+    "storage_bucket": "magic-password-2a82c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058226922760:android:bb2ffa9934e5c629e538bd",
+        "android_client_info": {
+          "package_name": "com.quyetnv.magic_password"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwACQU8tMbKmwg6rMVstUjJb4GqUdjpsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

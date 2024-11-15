@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:intl/intl.dart';
 
-/// Custom log printer that includes timestamp and custom formatting
+/// Custom log printer with timestamp and custom formatting
 class CustomLogPrinter extends PrettyPrinter {
   CustomLogPrinter({
     super.methodCount = 2,
@@ -14,62 +14,112 @@ class CustomLogPrinter extends PrettyPrinter {
   });
 
   @override
-  String getTime(DateTime time) {
-    return DateFormat('HH:mm:ss.SSS').format(time);
-  }
+  String getTime(DateTime time) => DateFormat('HH:mm:ss.SSS').format(time);
 }
 
-/// Custom log filter that only shows logs in debug mode
+/// Custom log filter to show logs only in debug mode
 class CustomLogFilter extends LogFilter {
   @override
-  bool shouldLog(LogEvent event) {
-    return kDebugMode;
-  }
+  bool shouldLog(LogEvent event) => kDebugMode;
 }
 
-/// Singleton logger instance
+/// Logger utility with a singleton instance
 class LoggerUtils {
-  static Logger? _instance;
+  LoggerUtils._(); // Private constructor to prevent instantiation
 
-  static Logger get instance {
-    _instance ??= Logger(
-      filter: CustomLogFilter(),
-      printer: CustomLogPrinter(),
-      output: ConsoleOutput(),
-    );
-    return _instance!;
+  static final Logger _instance = Logger(
+    filter: CustomLogFilter(),
+    printer: CustomLogPrinter(),
+    output: ConsoleOutput(),
+  );
+
+  static Logger get instance => _instance;
+
+  /// Generic log handler
+  static void log({
+    required Level level,
+    required dynamic message,
+    dynamic error,
+    StackTrace? stackTrace,
+  }) {
+    _instance.log(level, message, error: error, stackTrace: stackTrace);
   }
-
-  // Prevent instantiation
-  LoggerUtils._();
 
   /// Log debug message
-  static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.d(message, error: error, stackTrace: stackTrace);
-  }
+  static void d(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.debug,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 
   /// Log info message
-  static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.i(message, error: error, stackTrace: stackTrace);
-  }
+  static void i(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.info,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 
   /// Log warning message
-  static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.w(message, error: error, stackTrace: stackTrace);
-  }
+  static void w(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.warning,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 
   /// Log error message
-  static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.e(message, error: error, stackTrace: stackTrace);
-  }
+  static void e(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.error,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 
   /// Log trace message
-  static void t(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.t(message, error: error, stackTrace: stackTrace);
-  }
+  static void t(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.trace,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 
   /// Log fatal message
-  static void f(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    instance.f(message, error: error, stackTrace: stackTrace);
-  }
+  static void f(
+    dynamic message, {
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      log(
+        level: Level.fatal,
+        message: message,
+        error: error,
+        stackTrace: stackTrace,
+      );
 }
