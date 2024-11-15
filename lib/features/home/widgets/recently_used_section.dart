@@ -6,9 +6,11 @@ import 'package:magic_password/core/widgets/password_item.dart';
 
 class RecentlyUsedSection extends StatelessWidget {
   final List<PasswordEntity> passwords;
+  final Function(PasswordEntity) deletePassword;
 
   const RecentlyUsedSection({
     required this.passwords,
+    required this.deletePassword,
     super.key,
   });
 
@@ -36,10 +38,8 @@ class RecentlyUsedSection extends StatelessWidget {
         else
           ...passwords.map(
             (password) => PasswordItem(
-              icon: password.accountType.icon,
-              title: password.accountType.name,
-              email: password.accountCredential,
-              encryptedPassword: password.encryptedValue,
+              password: password,
+              deletePassword: () => deletePassword(password),
             ),
           ),
       ],

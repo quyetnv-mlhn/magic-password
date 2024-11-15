@@ -95,7 +95,7 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
       if (password.accountCredential.isEmpty ||
           password.encryptedValue.isEmpty) {
         SnackBarHandler.showWarning(
-          LocaleKeys.warning_passwordAndNameRequired.tr(),
+          LocaleKeys.warnings_passwordAndNameRequired.tr(),
         );
         return;
       }
@@ -115,7 +115,7 @@ class PasswordGeneratorNotifier extends _$PasswordGeneratorNotifier {
     final anySelected = newOptions.values.any((option) => option == true);
 
     if (!anySelected) {
-      SnackBarHandler.showWarning(LocaleKeys.warning_selectAtLeastOne.tr());
+      SnackBarHandler.showWarning(LocaleKeys.warnings_selectAtLeastOne.tr());
       return;
     }
     final password = _passwordHandler.generatePassword(

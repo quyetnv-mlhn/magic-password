@@ -14,5 +14,6 @@ class SearchPageState with _$SearchPageState {
     @Default('') String searchQuery,
     @Default({}) Set<SectionEnum> selectedSections,
     @Default({}) Set<AccountTypeEntity> selectedType,
+    @Default(false) bool showFilterSheet,
   }) = _SearchPageState;
 }

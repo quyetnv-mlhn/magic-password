@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
+import 'package:magic_password/gen/locale_keys.g.dart';
 
 class EncryptionKeyDialog extends ConsumerStatefulWidget {
   const EncryptionKeyDialog({super.key});
@@ -31,7 +33,7 @@ class _EncryptionKeyDialogState extends ConsumerState<EncryptionKeyDialog> {
         borderRadius: BorderRadius.circular(20),
       ),
       title: Text(
-        'Enter Encryption Key',
+        LocaleKeys.encryption_enterEncryptionKey.tr(),
         style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
       ),
       content: Column(
@@ -41,7 +43,7 @@ class _EncryptionKeyDialogState extends ConsumerState<EncryptionKeyDialog> {
             controller: _encryptionKeyController,
             obscureText: _isTextObscured,
             decoration: InputDecoration(
-              hintText: 'Enter your key',
+              hintText: LocaleKeys.encryption_enterMasterKey.tr(),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(radiusS),
               ),
@@ -56,17 +58,19 @@ class _EncryptionKeyDialogState extends ConsumerState<EncryptionKeyDialog> {
           ),
           verticalSpaceM,
           Text(
-            'Note: This key will only be used for the current session. '
-            'You can change or clear it in Settings.',
+            LocaleKeys.encryption_note.tr(),
             style: textTheme.bodyMedium,
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
           ),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(
+            LocaleKeys.actions_cancel.tr(),
+            style: textTheme.bodyLarge,
+          ),
         ),
         ElevatedButton(
           onPressed: () {
@@ -75,7 +79,10 @@ class _EncryptionKeyDialogState extends ConsumerState<EncryptionKeyDialog> {
                 .updateEncryptionKey(_encryptionKeyController.text);
             Navigator.pop(context, true);
           },
-          child: const Text('Save'),
+          child: Text(
+            LocaleKeys.actions_confirm.tr(),
+            style: textTheme.bodyLarge,
+          ),
         ),
       ],
     );

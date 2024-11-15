@@ -28,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
     final textTheme = context.textTheme;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: paddingHM,
       decoration: BoxDecoration(
         color: colors.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(radiusM),

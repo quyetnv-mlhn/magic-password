@@ -25,7 +25,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       return await _managerDataSource.encryptPassword(password, key);
     } catch (e) {
       throw EncryptionException(
-        messageKey: '${LocaleKeys.error_encryptPasswordFailed.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_encryptPasswordFailed.tr()}: $e',
       );
     }
   }
@@ -36,7 +36,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       return await _managerDataSource.decryptPassword(encryptedPassword, key);
     } catch (e) {
       throw DecryptionException(
-        messageKey: '${LocaleKeys.error_decryptPasswordFailed.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_decryptPasswordFailed.tr()}: $e',
       );
     }
   }
@@ -47,7 +47,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       return _managerDataSource.generateKey();
     } catch (e) {
       throw PasswordStorageException(
-        messageKey: '${LocaleKeys.error_failedGeneratePassword.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_failedGeneratePassword.tr()}: $e',
       );
     }
   }
@@ -70,7 +70,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       );
     } catch (e) {
       throw PasswordStorageException(
-        messageKey: '${LocaleKeys.error_failedGeneratePassword.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_failedGeneratePassword.tr()}: $e',
       );
     }
   }
@@ -84,7 +84,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
           .toList();
     } catch (e) {
       throw PasswordStorageException(
-        messageKey: '${LocaleKeys.error_failedGetSavedPassword.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_failedGetSavedPassword.tr()}: $e',
       );
     }
   }
@@ -98,7 +98,7 @@ class PasswordRepositoryImpl implements PasswordRepository {
       );
     } catch (e) {
       throw PasswordStorageException(
-        messageKey: '${LocaleKeys.error_failedSavePassword.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_failedSavePassword.tr()}: $e',
       );
     }
   }
@@ -109,13 +109,38 @@ class PasswordRepositoryImpl implements PasswordRepository {
       final encrypted = await _localDataSource.loadPassword(name);
       if (encrypted == null) {
         throw ValidationException(
-          messageKey: LocaleKeys.error_passwordNotFound.tr(),
+          messageKey: LocaleKeys.errors_passwordNotFound.tr(),
         );
       }
       return encrypted;
     } catch (e) {
       throw PasswordStorageException(
-        messageKey: '${LocaleKeys.error_failedLoadEncryptedPassword.tr()}: $e',
+        messageKey: '${LocaleKeys.errors_failedLoadEncryptedPassword.tr()}: $e',
+      );
+    }
+  }
+
+  @override
+  Future<void> deletePassword(PasswordEntity password) async {
+    try {
+      await _localDataSource.deletePassword(password.keyName);
+    } catch (e) {
+      throw PasswordStorageException(
+        messageKey: '${LocaleKeys.errors_failedDeletePassword.tr()}: $e',
+      );
+    }
+  }
+
+  @override
+  Future<void> updatePassword(PasswordEntity password) {
+    try {
+      return _localDataSource.savePassword(
+        password.keyName,
+        jsonEncode(password.toJson()),
+      );
+    } catch (e) {
+      throw PasswordStorageException(
+        messageKey: '${LocaleKeys.errors_failedUpdatePassword.tr()}: $e',
       );
     }
   }

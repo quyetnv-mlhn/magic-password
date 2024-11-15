@@ -1,10 +1,27 @@
 {
-  "error": {
+  "actions": {
+    "apply": "Áp dụng",
+    "cancel": "Hủy",
+    "clear": "Xóa",
+    "close": "Đóng",
+    "confirm": "Xác nhận"
+  },
+  "encryption": {
+    "enterEncryptionKey": "Nhập khóa mã hóa",
+    "enterMasterKey": "Nhập khóa chính",
+    "enterYourMasterKey": "Nhập khóa chính của bạn",
+    "masterKey": "Khóa chính",
+    "note": "Khóa này chỉ được sử dụng cho phiên hiện tại. Bạn có thể thay đổi hoặc xóa nó trong Cài đặt"
+  },
+  "errors": {
     "decryptPasswordFailed": "Không thể giải mã mật khẩu",
     "encryptPasswordFailed": "Mã hóa mật khẩu thất bại",
+    "failedDeletePassword": "Xóa mật khẩu thất bại",
+    "failedGeneratePassword": "Không thể tạo mật khẩu",
     "failedGetSavedPassword": "Không thể lấy mật khẩu đã lưu",
-    "failedLoadEncryptedPassword": "Không tải được mật khẩu đã mã hóa",
-    "failedSavePassword": "Không lưu được mật khẩu",
+    "failedLoadEncryptedPassword": "Không thể tải mật khẩu đã mã hóa",
+    "failedSavePassword": "Không thể lưu mật khẩu",
+    "failedUpdatePassword": "Cập nhật mật khẩu không thành công",
     "invalidInput": "Đầu vào không hợp lệ",
     "invalidKey": "Khóa không hợp lệ",
     "noInternet": "Không có kết nối internet",
@@ -13,21 +30,42 @@
     "serverError": "Lỗi máy chủ",
     "timeout": "Yêu cầu hết thời gian"
   },
-  "password": "Mật khẩu",
-  "saved": "Đã lưu",
-  "someThingWentWrong": "Đã xảy ra lỗi",
+  "filter": {
+    "sections": {
+      "apps": "Ứng dụng",
+      "cards": "Thẻ",
+      "social": "Xã hội"
+    }
+  },
+  "messages": {
+    "processing": "Đang xử lý...",
+    "saved": "Đã lưu",
+    "someThingWentWrong": "Đã xảy ra lỗi"
+  },
+  "password": {
+    "label": "Mật khẩu"
+  },
+  "search": {
+    "filter": {
+      "accountTypes": "Các loại tài khoản",
+      "sections": "Các mục",
+      "title": "Bộ lọc"
+    },
+    "noResults": "Không tìm thấy mật khẩu nào",
+    "title": "Tìm kiếm mật khẩu..."
+  },
   "success": {
     "passwordDeleted": "Đã xóa mật khẩu thành công",
-    "passwordSaved": "Mật khẩu đã được lưu thành công",
-    "passwordUpdated": "Đã cập nhật mật khẩu thành công"
+    "passwordSaved": "Đã lưu mật khẩu thành công",
+    "passwordUpdated": "Cập nhật mật khẩu thành công"
   },
-  "warning": {
-    "keyRequired": "Khóa là bắt buộc",
+  "warnings": {
+    "keyRequired": "Yêu cầu khóa",
     "nameRequired": "Tên là bắt buộc",
     "passwordAndKeyRequired": "Yêu cầu mật khẩu và khóa",
-    "passwordAndNameRequired": "Yêu cầu mật khẩu và tên",
+    "passwordAndNameRequired": "Mật khẩu và tên là bắt buộc",
     "passwordNameRequired": "Tên của mật khẩu là bắt buộc",
-    "passwordRequired": "Yêu cầu mật khẩu",
+    "passwordRequired": "Mật khẩu là bắt buộc",
     "selectAtLeastOne": "Chọn ít nhất một tùy chọn"
   }
 }

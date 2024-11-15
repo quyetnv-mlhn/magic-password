@@ -11,10 +11,10 @@ class ValidationException extends AppException {
 
 class InvalidInputException extends ValidationException {
   const InvalidInputException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_invalidInput);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_invalidInput);
 }
 
 class RequiredFieldException extends ValidationException {
   const RequiredFieldException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_requiredField);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_requiredField);
 }

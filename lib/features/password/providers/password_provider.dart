@@ -56,7 +56,7 @@ class PasswordNotifier extends _$PasswordNotifier {
     setLoading(true);
     if (state.inputPassword.isEmpty || state.inputKey.isEmpty) {
       SnackBarHandler.showWarning(
-        LocaleKeys.warning_passwordAndKeyRequired.tr(),
+        LocaleKeys.warnings_passwordAndKeyRequired.tr(),
       );
       return;
     }
@@ -86,7 +86,7 @@ class PasswordNotifier extends _$PasswordNotifier {
   Future<void> savePassword(PasswordEntity password) async {
     if (password.accountCredential.isEmpty || password.encryptedValue.isEmpty) {
       SnackBarHandler.showWarning(
-        LocaleKeys.warning_passwordAndNameRequired.tr(),
+        LocaleKeys.warnings_passwordAndNameRequired.tr(),
       );
       return;
     }
@@ -96,7 +96,9 @@ class PasswordNotifier extends _$PasswordNotifier {
 
   Future<void> loadEncryptedPassword(PasswordEntity? password) async {
     if (password == null) {
-      SnackBarHandler.showWarning(LocaleKeys.warning_passwordNameRequired.tr());
+      SnackBarHandler.showWarning(
+        LocaleKeys.warnings_passwordNameRequired.tr(),
+      );
       return;
     }
     state = state.copyWith(

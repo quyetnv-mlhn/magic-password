@@ -5,6 +5,8 @@ abstract class PasswordLocalDataSource {
   Future<Map<String, String>> getAllPasswords();
 
   Future<String?> loadPassword(String name);
+
+  Future<void> deletePassword(String keyName);
 }
 
 class PasswordLocalDataSourceImpl implements PasswordLocalDataSource {
@@ -27,5 +29,10 @@ class PasswordLocalDataSourceImpl implements PasswordLocalDataSource {
   @override
   Future<String?> loadPassword(String name) {
     return _storage.read(key: name);
+  }
+
+  @override
+  Future<void> deletePassword(String keyName) async {
+    await _storage.delete(key: keyName);
   }
 }

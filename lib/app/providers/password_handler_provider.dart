@@ -51,7 +51,7 @@ class PasswordHandler extends _$PasswordHandler {
     try {
       if (masterKey.isEmpty || password.isEmpty) {
         SnackBarHandler.showWarning(
-          LocaleKeys.warning_passwordAndKeyRequired.tr(),
+          LocaleKeys.warnings_passwordAndKeyRequired.tr(),
         );
         return null;
       }
@@ -72,7 +72,7 @@ class PasswordHandler extends _$PasswordHandler {
     try {
       if (masterKey.isEmpty || encryptedPassword.isEmpty) {
         SnackBarHandler.showWarning(
-          LocaleKeys.warning_passwordAndKeyRequired.tr(),
+          LocaleKeys.warnings_passwordAndKeyRequired.tr(),
         );
         return null;
       }
@@ -89,7 +89,7 @@ class PasswordHandler extends _$PasswordHandler {
   Future<bool> savePassword(PasswordEntity password) async {
     if (password.accountCredential.isEmpty || password.encryptedValue.isEmpty) {
       SnackBarHandler.showWarning(
-        LocaleKeys.warning_passwordAndNameRequired.tr(),
+        LocaleKeys.warnings_passwordAndNameRequired.tr(),
       );
       return false;
     }
@@ -111,5 +111,39 @@ class PasswordHandler extends _$PasswordHandler {
       handleError(e, s);
     }
     return [];
+  }
+
+  Future<bool> deletePassword(PasswordEntity password) async {
+    try {
+      await _repository.deletePassword(password);
+      SnackBarHandler.showSuccess(LocaleKeys.success_passwordDeleted.tr());
+      return true;
+    } catch (e, s) {
+      handleError(e, s);
+    }
+    return false;
+  }
+
+  Future<bool> updatePassword(
+    PasswordEntity password, {
+    bool showSnackbar = true,
+  }) async {
+    if (password.accountCredential.isEmpty || password.encryptedValue.isEmpty) {
+      SnackBarHandler.showWarning(
+        LocaleKeys.warnings_passwordAndNameRequired.tr(),
+      );
+      return false;
+    }
+
+    try {
+      await _repository.updatePassword(password);
+      if (showSnackbar) {
+        SnackBarHandler.showSuccess(LocaleKeys.success_passwordUpdated.tr());
+      }
+      return true;
+    } catch (e, s) {
+      handleError(e, s);
+    }
+    return false;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
@@ -6,7 +7,7 @@ import 'package:magic_password/features/home/providers/home_page_provider.dart';
 import 'package:magic_password/features/home/states/home_page_state.dart';
 import 'package:magic_password/features/home/widgets/header_section.dart';
 import 'package:magic_password/features/main/providers/bottom_nav_provider.dart';
-import 'package:magic_password/features/password/widgets/loading_overlay.dart';
+import 'package:magic_password/core/widgets/loading_overlay.dart';
 import 'package:magic_password/features/home/widgets/manage_password_section.dart';
 import 'package:magic_password/features/home/widgets/recently_used_section.dart';
 
@@ -60,6 +61,9 @@ class HomeScreenContent extends ConsumerWidget {
                 verticalSpaceL,
                 RecentlyUsedSection(
                   passwords: state.recentPasswords,
+                  deletePassword: ref
+                      .read(homePageNotifierProvider.notifier)
+                      .deletePassword,
                 ),
               ],
             ),

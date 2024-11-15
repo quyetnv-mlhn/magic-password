@@ -11,15 +11,15 @@ class NetworkException extends AppException {
 
 class NoInternetException extends NetworkException {
   const NoInternetException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_noInternet);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_noInternet);
 }
 
 class ServerException extends NetworkException {
   const ServerException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_serverError);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_serverError);
 }
 
 class TimeoutException extends NetworkException {
   const TimeoutException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_timeout);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_timeout);
 }

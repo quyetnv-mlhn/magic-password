@@ -11,32 +11,36 @@ class PasswordException extends AppException {
 
 class EncryptionException extends PasswordException {
   const EncryptionException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_encryptPasswordFailed);
+      : super(
+          messageKey: messageKey ?? LocaleKeys.errors_encryptPasswordFailed,
+        );
 }
 
 class DecryptionException extends PasswordException {
   const DecryptionException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_decryptPasswordFailed);
+      : super(
+          messageKey: messageKey ?? LocaleKeys.errors_decryptPasswordFailed,
+        );
 }
 
 class InvalidKeyException extends PasswordException {
   const InvalidKeyException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_invalidKey);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_invalidKey);
 }
 
 class PasswordStorageException extends PasswordException {
   const PasswordStorageException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_failedSavePassword);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_failedSavePassword);
 }
 
 class PasswordNotFoundException extends PasswordException {
   const PasswordNotFoundException({String? messageKey})
-      : super(messageKey: messageKey ?? LocaleKeys.error_passwordNotFound);
+      : super(messageKey: messageKey ?? LocaleKeys.errors_passwordNotFound);
 }
 
 class FailedGeneratePasswordException extends PasswordException {
   const FailedGeneratePasswordException({String? messageKey})
       : super(
-          messageKey: messageKey ?? LocaleKeys.error_failedGeneratePassword,
+          messageKey: messageKey ?? LocaleKeys.errors_failedGeneratePassword,
         );
 }

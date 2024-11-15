@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,74 +8,86 @@ import 'package:magic_password/app/providers/password_handler_provider.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
 import 'package:magic_password/core/extensions/theme_ext.dart';
 import 'package:magic_password/core/utils/color_utils.dart';
+import 'package:magic_password/core/utils/snackbar_handler.dart';
+import 'package:magic_password/domain/entities/password/password.dart';
+import 'package:magic_password/gen/locale_keys.g.dart';
 
 class PasswordItem extends ConsumerWidget {
-  final String icon;
-  final String title;
-  final String email;
-  final String encryptedPassword;
-  final VoidCallback? onMorePressed;
+  final PasswordEntity password;
+  final VoidCallback deletePassword;
 
   const PasswordItem({
-    required this.icon,
-    required this.title,
-    required this.email,
-    required this.encryptedPassword,
+    required this.password,
+    required this.deletePassword,
     super.key,
-    this.onMorePressed,
   });
 
   Future<String?> _showMasterKeyDialog(BuildContext context) async {
-    final textTheme = context.textTheme;
     String? masterKey;
+    bool isKeyVisible = false;
 
     return showDialog<String>(
       context: context,
       barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(radiusM),
           ),
           title: Text(
-            'Enter Master Key',
-            style: textTheme.titleLarge,
+            LocaleKeys.encryption_enterMasterKey.tr(),
+            style: context.textTheme.titleLarge,
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                obscureText: true,
+                obscureText: !isKeyVisible,
                 decoration: InputDecoration(
-                  labelText: 'Master Key',
-                  hintText: 'Enter your master key',
+                  labelText: LocaleKeys.encryption_masterKey.tr(),
+                  hintText: LocaleKeys.encryption_enterYourMasterKey.tr(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(radiusS),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      isKeyVisible ? Icons.visibility_off : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isKeyVisible = !isKeyVisible;
+                      });
+                    },
                   ),
                 ),
                 onChanged: (value) => masterKey = value,
               ),
-              const SizedBox(height: 12),
+              verticalSpaceM,
               Text(
-                'Note: This key will only be used for the current session. '
-                'You can change or clear it in Settings.',
-                style: textTheme.bodySmall,
-                textAlign: TextAlign.justify,
+                LocaleKeys.encryption_note.tr(),
+                style: context.textTheme.bodyMedium,
+                textAlign: TextAlign.left,
               ),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: Text(
+                LocaleKeys.actions_cancel.tr(),
+                style: context.textTheme.bodyLarge,
+              ),
             ),
             ElevatedButton(
               onPressed: () => Navigator.pop(context, masterKey),
-              child: const Text('Confirm'),
+              child: Text(
+                LocaleKeys.actions_confirm.tr(),
+                style: context.textTheme.bodyLarge,
+              ),
             ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -92,37 +105,122 @@ class PasswordItem extends ConsumerWidget {
     final decryptedPassword =
         await ref.read(passwordHandlerProvider.notifier).decryptPassword(
               masterKey: ref.read(masterKeyNotifierProvider)!,
-              encryptedPassword: encryptedPassword,
+              encryptedPassword: password.encryptedValue,
             );
 
     if (decryptedPassword != null) {
-      if (!context.mounted) {
-        return;
+      if (context.mounted) {
+        await _copyToClipboard(context, ref, decryptedPassword);
       }
-      await _copyToClipboard(context, decryptedPassword);
     } else {
       masterKeyNotifier.clearMasterKey();
     }
   }
 
-  Future<void> _copyToClipboard(BuildContext context, String text) async {
+  Future<void> _copyToClipboard(
+    BuildContext context,
+    WidgetRef ref,
+    String text,
+  ) async {
     await Clipboard.setData(ClipboardData(text: text));
     if (!context.mounted) {
       return;
     }
+    ref.read(passwordHandlerProvider.notifier).updatePassword(
+          password.copyWith(lastUsedAt: DateTime.now()),
+          showSnackbar: false,
+        );
+    SnackBarHandler.showSuccess('Password copied to clipboard');
+  }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Password copied to clipboard'),
-        duration: Duration(seconds: 2),
+  void _showMoreOptions(BuildContext context, WidgetRef ref) {
+    final colors = context.colorScheme;
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(radiusL)),
+      ),
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Header
+            Padding(
+              padding: paddingAllM,
+              child: Row(
+                children: [
+                  SvgPicture.asset(password.accountType.icon, width: iconM),
+                  horizontalSpaceM,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          password.accountType.name,
+                          style: context.textTheme.titleMedium,
+                        ),
+                        Text(
+                          password.accountCredential,
+                          style: context.textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+
+            ListTile(
+              leading: Icon(Icons.delete, color: colors.error),
+              title: Text(
+                'Delete',
+                style:
+                    context.textTheme.bodyLarge?.copyWith(color: colors.error),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                _showDeleteConfirmation(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDeleteConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Password Confirmation'),
+        content: Text(
+          'Are you sure you want to delete this password from '
+          '${password.accountType.name}?'
+          '\nThis action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              deletePassword.call();
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: context.colorScheme.error,
+            ),
+            child: const Text('Delete'),
+          ),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = context.colorScheme;
-    final textTheme = context.textTheme;
     final backgroundColor = ColorUtils.getRandomPastelColor(context);
 
     return Container(
@@ -135,7 +233,7 @@ class PasswordItem extends ConsumerWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            icon,
+            password.accountType.icon,
             width: iconXL,
             height: iconXL,
             placeholderBuilder: (context) => const CircularProgressIndicator(),
@@ -146,16 +244,16 @@ class PasswordItem extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
-                  style: textTheme.titleMedium?.copyWith(
-                    color: colors.onSurface,
+                  password.accountType.name,
+                  style: context.textTheme.titleMedium?.copyWith(
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
                 verticalSpaceXS,
                 Text(
-                  email,
-                  style: textTheme.bodySmall?.copyWith(
-                    color: colors.onSurface,
+                  password.accountCredential,
+                  style: context.textTheme.bodySmall?.copyWith(
+                    color: context.colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -167,7 +265,7 @@ class PasswordItem extends ConsumerWidget {
           ),
           IconButton(
             icon: const Icon(Icons.more_vert),
-            onPressed: onMorePressed,
+            onPressed: () => _showMoreOptions(context, ref),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magic_password/core/configs/app_sizes.dart';
+import 'package:magic_password/core/utils/snackbar_handler.dart';
 import 'package:magic_password/features/generate_password/providers/password_generator_provider.dart';
 import 'package:magic_password/features/generate_password/widgets/encryption_key_dialog.dart';
 
@@ -79,15 +80,7 @@ class ActionButtons extends ConsumerWidget {
     TextTheme textTheme,
   ) {
     Clipboard.setData(ClipboardData(text: password));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Password copied to clipboard',
-          style: textTheme.bodyMedium?.copyWith(color: colors.onPrimary),
-        ),
-        backgroundColor: colors.primary,
-      ),
-    );
+    SnackBarHandler.showSuccess('Password copied to clipboard');
   }
 }
 
